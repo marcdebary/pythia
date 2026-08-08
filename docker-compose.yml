@@ -1,0 +1,46 @@
+# Pythia: zwei Rollen aus einem Abbild.
+#
+#   api         die lesende HTTP-Oberflaeche
+#   scheduler   die Zeitsteuerung, die das Beobachtungsbuch fuellt
+#
+# Es gibt bewusst KEINEN Eintrag im Cron des Rechners. Wer diese Software
+# einsetzt, tippt `docker compose up -d` und ist fertig. Genau diese Trennung
+# hat einmal 29 Stunden Datenverlust verursacht: der Sammler haengte am Cron
+# des Hosts, dessen Eintraege jemand auskommentiert hatte - der Container lief
+# weiter und schrieb nichts.
+
+x-gemeinsam: &gemeinsam
+  build: .
+  restart: unless-stopped
+  env_file: .env
+  environment:
+    - DATA_DIR=/data
+    - WEB_DIR=/web
+    - PYTHONUNBUFFERED=1
+  volumes:
+    - ./data:/data
+  logging:
+    driver: json-file
+    options: {max-size: "10m", max-file: "5"}
+
+services:
+  api:
+    <<: *gemeinsam
+    container_name: pythia-api
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+    ports:
+      - "${PYTHIA_PORT:-8300}:8000"
+    deploy:
+      resources:
+        limits: {memory: 512M}
+
+  scheduler:
+    <<: *gemeinsam
+    container_name: pythia-scheduler
+    command: ["python", "scheduler.py"]
+    depends_on:
+      api:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits: {memory: 512M}

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Pythia — measure before you bet</title>
+<style>
+:root{
+  --bg:#0b0f18; --card:#131a28; --line:#212c42;
+  --t0:#e8eef9; --t1:#9aabc6; --t2:#61708c;
+  --pos:#3ec98a; --neg:#ff6b7f; --warn:#f0b429; --link:#4aa3ff;
+}
+@media (prefers-color-scheme: light){
+  :root{ --bg:#f6f8fc; --card:#fff; --line:#dde4ee;
+         --t0:#101725; --t1:#4a5a75; --t2:#7a89a3; }
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--t0);
+  font:14px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:22px 18px 70px}
+header{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+h1{font-size:19px;letter-spacing:.06em;margin:0;font-weight:700}
+h2{font-size:13px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--t2);margin:30px 0 10px;font-weight:700}
+.tag{font-size:11px;color:var(--t2)}
+.card{background:var(--card);border:1px solid var(--line);
+  border-radius:12px;padding:16px;margin-bottom:12px}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.kpi .n{font-size:24px;font-weight:700;letter-spacing:-.01em}
+.kpi .l{font-size:11px;color:var(--t2);text-transform:uppercase;letter-spacing:.06em}
+.kpi .s{font-size:12px;color:var(--t1);margin-top:2px}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th{text-align:left;font-size:11px;color:var(--t2);font-weight:700;
+  text-transform:uppercase;letter-spacing:.05em;padding:6px 8px;
+  border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:6px 8px;border-bottom:1px solid var(--line);font-size:13px}
+tr:last-child td{border-bottom:0}
+.r{text-align:right}
+.pos{color:var(--pos)} .neg{color:var(--neg)} .warn{color:var(--warn)}
+.muted{color:var(--t2)}
+.verdict{font-size:15px;font-weight:600;padding:12px 14px;border-radius:9px;
+  border:1px solid var(--line);margin-bottom:12px}
+.verdict.no{border-color:var(--neg)} .verdict.yes{border-color:var(--pos)}
+.verdict.wait{border-color:var(--warn)}
+.note{font-size:12px;color:var(--t1);margin-top:8px;line-height:1.6}
+pre{white-space:pre-wrap;font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;
+  color:var(--t1);margin:0}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+.ok{background:var(--pos)} .bad{background:var(--neg)}
+a{color:var(--link)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>PYTHIA</h1>
+  <span class="tag">measurement instrument for prediction markets — read-only, never trades</span>
+</header>
+
+<div id="status" class="grid" style="margin-top:18px"></div>
+
+<h2>1 · Are we better than the market?</h2>
+<div id="brier" class="card"><span class="muted">loading…</span></div>
+
+<h2>2 · Weather — calibration, then Brier, then money</h2>
+<div id="weather" class="card"><span class="muted">loading…</span></div>
+
+<h2>3 · Where does the price deviate — and would it fill?</h2>
+<div id="edges" class="card"><span class="muted">loading…</span></div>
+
+<p class="note" style="margin-top:26px">
+Sorted by deviation, not by win probability. A contract at 95c wins 95 times out
+of 100 and is still a losing trade if it is worth 94c.
+<b>Our share</b> is how large a $100 order would be against the queue ahead of it —
+below 1 % it will effectively never fill. Rows above 15 pp are flagged: against a
+market turning over six figures a day, your own model error is far more likely
+than the market's.
+</p>
+
+</div>
+<script>
+const $ = s => document.querySelector(s);
+const num = (v,d=2) => v===null||v===undefined||Number.isNaN(v) ? "—" : Number(v).toFixed(d);
+const sign = (v,d=2) => v===null||v===undefined ? "—" : (v>0?"+":"") + Number(v).toFixed(d);
+const cls = v => v===null||v===undefined ? "" : (v>0?"pos":v<0?"neg":"");
+const esc = s => String(s??"").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+async function get(u){ const r = await fetch(u); if(!r.ok) throw new Error(r.status); return r.json(); }
+
+function kpi(label, n, sub, klass=""){
+  return `<div class="card kpi"><div class="l">${esc(label)}</div>
+    <div class="n ${klass}">${n}</div><div class="s">${esc(sub||"")}</div></div>`;
+}
+
+get("/api/status").then(d => {
+  const b = d.buecher || {};
+  const box = (name, o) => {
+    if(!o || !o.vorhanden) return kpi(name, "—", "no ledger yet");
+    const age = o.juengste_zeile_alter_sek;
+    const txt = age===null ? "never written"
+      : age < 3600 ? Math.round(age/60)+" min ago"
+      : Math.round(age/3600)+" h ago";
+    return kpi(name, o.zeilen.toLocaleString(),
+      `${o.kontrakte} contracts · newest ${txt}`,
+      o.frisch ? "pos" : "neg");
+  };
+  $("#status").innerHTML =
+    box("sports ledger", b.sport) + box("weather ledger", b.wetter) +
+    kpi("odds credits left", d.abrufeinheiten_uebrig ?? "—", "free tier: 500/month") +
+    kpi("trading", "disabled", "methods removed, not switched off");
+}).catch(e => $("#status").innerHTML = `<div class="card">status unavailable (${e.message})</div>`);
+
+get("/api/brier").then(d => {
+  if(!d.ok){ $("#brier").innerHTML = `<span class="muted">${esc(d.grund)}</span>`; return; }
+  const p = d.paarvergleich, m = d.murphy;
+  const better = p.besser === "wir";
+  const verdict = p.nachweisbar
+    ? `<div class="verdict ${better?"yes":"no"}">${better?"We are measurably better than the market.":"The market is measurably better than us."}</div>`
+    : `<div class="verdict wait">No demonstrable difference. The interval contains zero — any real difference is below ${num(Math.max(Math.abs(p["95_von"]),Math.abs(p["95_bis"])),5)} Brier per event.</div>`;
+  $("#brier").innerHTML = verdict + `
+    <table>
+      <tr><th>${d.ereignisse} settled events</th><th class="r">Brier</th><th class="r">log score</th></tr>
+      <tr><td>our reference</td><td class="r">${num(d.brier_unser,4)}</td><td class="r">${num(d.log_unser,3)}</td></tr>
+      <tr><td>market mid price</td><td class="r">${num(d.brier_markt,4)}</td><td class="r">${num(d.log_markt,3)}</td></tr>
+      <tr><td class="muted">always the base rate</td><td class="r muted">${num(d.brier_grundrate,4)}</td><td class="r muted">—</td></tr>
+      <tr><td class="muted">always 50 %</td><td class="r muted">${num(d.brier_immer_50,4)}</td><td class="r muted">—</td></tr>
+    </table>
+    <table style="margin-top:14px">
+      <tr><th>Murphy decomposition</th><th class="r">value</th><th>meaning</th></tr>
+      <tr><td>reliability</td><td class="r">${num(m.zuverlaessigkeit,4)}</td><td class="muted">calibration — want small</td></tr>
+      <tr><td>resolution</td><td class="r">${num(m.aufloesung,4)}</td><td class="muted">actual skill — want large</td></tr>
+      <tr><td><b>uncertainty</b></td><td class="r"><b>${num(m.ungewissheit,4)}</b></td><td class="muted">randomness of the events — cannot be improved</td></tr>
+      <tr><td class="muted">binning residual</td><td class="r muted">${sign(m.kuebelrest,4)}</td><td class="muted">reported, not hidden</td></tr>
+    </table>
+    <p class="note">Paired difference ${sign(p.unterschied_je_ereignis,5)} per event,
+      95 %: ${sign(p["95_von"],5)} to ${sign(p["95_bis"],5)}.
+      ${p.fehlen_noch>0 ? `About ${p.noetige_ereignisse.toLocaleString()} events would be needed to prove a difference this size — ${p.fehlen_noch.toLocaleString()} still missing.` : ""}
+      <br>${esc(d.lesart)}</p>`;
+}).catch(e => $("#brier").innerHTML = `<span class="muted">unavailable (${e.message})</span>`);
+
+get("/api/weather/report").then(d => {
+  $("#weather").innerHTML = `<pre>${esc(d.text)}</pre>`;
+}).catch(e => $("#weather").innerHTML = `<span class="muted">unavailable (${e.message})</span>`);
+
+get("/api/edges?einsatz=100&limit=25").then(d => {
+  if(!d.zeilen || !d.zeilen.length){
+    $("#edges").innerHTML = `<span class="muted">No fresh observations. The collector writes every few minutes; ${d.beobachtet||0} rows were in range.</span>`;
+    return;
+  }
+  const rows = d.zeilen.map(z => `<tr>
+      <td>${esc(z.art)}</td>
+      <td>${esc(z.was)}<div class="muted" style="font-size:11px">${esc(z.kontext||"")}</div></td>
+      <td class="r">${num(z.referenz_pct,1)} %</td>
+      <td class="r">${z.bid===null?"—":Math.round(z.bid*100)+"c"}</td>
+      <td class="r ${cls(z.stellen_pp)}">${sign(z.stellen_pp)} pp</td>
+      <td class="r">${z.schlange===null?"—":Math.round(z.schlange).toLocaleString()}</td>
+      <td class="r ${z.unser_anteil_pct!==null && z.unser_anteil_pct<1 ? "neg":""}">${num(z.unser_anteil_pct,1)} %</td>
+      <td>${z.verdaechtig?'<span class="warn">suspect</span>':""}</td>
+    </tr>`).join("");
+  $("#edges").innerHTML = `
+    <table>
+      <tr><th>type</th><th>contract</th><th class="r">reference</th><th class="r">bid</th>
+          <th class="r">edge posting</th><th class="r">queue ahead</th><th class="r">our share</th><th></th></tr>
+      ${rows}
+    </table>
+    <p class="note">${d.bewertbar} rows assessable, ${d.verdaechtig} flagged as suspect.</p>`;
+}).catch(e => $("#edges").innerHTML = `<span class="muted">unavailable (${e.message})</span>`);
+</script>
+</body>
+</html>
