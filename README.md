@@ -181,6 +181,23 @@ Docker, and roughly 200 MB of disk. Everything else is optional:
 
 ---
 
+## Development
+
+```bash
+pip install -r requirements-dev.txt
+pytest                     # 144 tests, no network access required
+```
+
+The tests deliberately need no network: they check the maths, the append-only
+guarantees, and the absence of any path to the exchange. A test that needs the
+internet to pass is a test that fails on a bad day for the wrong reason.
+
+One of them scans every shipped module for order-placement calls. If you add
+trading, you have to delete that test first — which makes it a decision rather
+than an accident.
+
+---
+
 ## Documentation
 
 - [docs/FINDINGS.md](docs/FINDINGS.md) — the three disproved hypotheses, with the numbers

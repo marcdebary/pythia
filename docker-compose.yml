@@ -8,6 +8,11 @@
 # hat einmal 29 Stunden Datenverlust verursacht: der Sammler haengte am Cron
 # des Hosts, dessen Eintraege jemand auskommentiert hatte - der Container lief
 # weiter und schrieb nichts.
+#
+# Die Containernamen haengen an PYTHIA_NAME, damit zwei Installationen
+# nebeneinander laufen koennen - etwa eine im Betrieb und eine zum Ausprobieren.
+# Fest verdrahtete Namen liessen die zweite mit einer Namenskollision
+# scheitern.
 
 x-gemeinsam: &gemeinsam
   build: .
@@ -26,7 +31,7 @@ x-gemeinsam: &gemeinsam
 services:
   api:
     <<: *gemeinsam
-    container_name: pythia-api
+    container_name: ${PYTHIA_NAME:-pythia}-api
     command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
     ports:
       - "${PYTHIA_PORT:-8300}:8000"
@@ -36,7 +41,7 @@ services:
 
   scheduler:
     <<: *gemeinsam
-    container_name: pythia-scheduler
+    container_name: ${PYTHIA_NAME:-pythia}-scheduler
     command: ["python", "scheduler.py"]
     depends_on:
       api:

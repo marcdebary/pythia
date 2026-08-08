@@ -1,0 +1,4 @@
+# Nur fuer die Tests. Absichtlich nicht im Abbild - ein Produktionsabbild soll
+# nichts enthalten, was es zur Laufzeit nicht braucht.
+-r requirements.txt
+pytest==8.3.4

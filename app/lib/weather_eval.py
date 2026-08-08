@@ -101,11 +101,11 @@ def auswertung(fenster_stunden: float = 6.0, path: Optional[str] = None,
             "SELECT * FROM weather_observations WHERE schema_version >= ?"
             " AND k_bid IS NOT NULL", (MIN_SCHEMA,))]
     if not rows:
-        return {"ok": False, "grund": "keine Beobachtungen ab Fassung 2"}
+        return {"ok": False, "grund": "no observations from model version 3 onwards"}
 
     aus = ergebnisse_holen([r["serie"] for r in rows], k)
     if not aus:
-        return {"ok": False, "grund": "keine abgerechneten Maerkte gefunden",
+        return {"ok": False, "grund": "no settled markets found",
                 "beobachtungen": len(rows)}
 
     # Je Kontrakt genau EINE Beobachtung: die mit dem passendsten Vorlauf.
@@ -119,7 +119,7 @@ def auswertung(fenster_stunden: float = 6.0, path: Optional[str] = None,
             beste[t] = {**r, "_abstand": d}
 
     if not beste:
-        return {"ok": False, "grund": "keine Ueberschneidung von Beobachtung und Abrechnung",
+        return {"ok": False, "grund": "no overlap between observations and settled markets",
                 "beobachtungen": len(rows), "abgerechnet": len(aus)}
 
     unser, markt, wetten = [], [], []
@@ -186,25 +186,33 @@ def _kalibrierung(paare, kuebel: int = 5) -> List[Dict]:
 
 
 def bericht(fenster_stunden: float = 6.0) -> str:
+    """Menschenlesbarer Bericht.
+
+    Der Text ist englisch, weil er im Kundenbild erscheint. Die Kommentare und
+    Bezeichner bleiben deutsch - das ist die Sprache dieses Quelltextes, und ein
+    halb uebersetzter Quelltext ist schlechter als ein konsequent einsprachiger.
+    """
     e = auswertung(fenster_stunden)
     if not e.get("ok"):
-        return f"Noch keine Auswertung moeglich: {e.get('grund')}"
-    z = [f"{e['kontrakte']} abgerechnete Kontrakte aus {e['beobachtungen']} Beobachtungen,"
-         f" Vorlauf rund {e['vorlauf_stunden']:.0f} h",
+        return f"No evaluation possible yet: {e.get('grund')}"
+    z = [f"{e['kontrakte']} settled contracts out of {e['beobachtungen']} observations,"
+         f" about {e['vorlauf_stunden']:.0f} h before close",
          "",
-         "1) IST DAS MODELL KALIBRIERT?",
-         f"   {'Bereich':>12} {'n':>5} {'gesagt':>8} {'eingetreten':>12}"]
+         "1) IS THE MODEL CALIBRATED?",
+         f"   {'range':>12} {'n':>5} {'said':>8} {'occurred':>12}"]
     for b in e["kalibrierung"]:
         z.append(f"   {b['von']:.1f}-{b['bis']:.1f}    {b['n']:5} {b['gesagt']:8.3f} "
                  f"{b['eingetreten']:12.3f}")
-    z += ["", "2) SIND WIR BESSER ALS KALSHI?",
-          f"   Brier wir {e['brier_unser']:.4f}   Brier Markt {e['brier_markt']:.4f}   "
-          f"{'wir sind besser' if e.get('besser_als_markt') else 'der Markt ist besser'}",
-          f"   Log   wir {e['log_unser']:.4f}   Log   Markt {e['log_markt']:.4f}"]
-    s = e.get("stellen_zum_geldkurs")
-    if s:
-        z += ["", "3) WAS HAETTE DAS STELLEN GEBRACHT? (Ausfuehrung NICHT geprueft)",
-              f"   {s['orders']} Orders, {s['getroffen']} davon aufgegangen",
-              f"   {s['gewinn_je_100_dollar']:+.3f} $ je 100 $ Einsatz, "
-              f"95 %: {s['95_von']:+.3f} bis {s['95_bis']:+.3f}"]
+    besser = e.get("besser_als_markt")
+    z += ["", "2) ARE WE BETTER THAN THE MARKET?",
+          f"   Brier ours {e['brier_unser']:.4f}   Brier market {e['brier_markt']:.4f}   "
+          f"{'we are better' if besser else 'the market is better'}",
+          f"   log   ours {e['log_unser']:.4f}   log   market {e['log_markt']:.4f}"]
+    s_ = e.get("stellen_zum_geldkurs")
+    if s_:
+        z += ["", "3) WHAT WOULD POSTING AT THE BID HAVE PAID?",
+              "   (execution NOT verified - this is an upper bound)",
+              f"   {s_['orders']} orders, {s_['getroffen']} of them came in",
+              f"   {s_['gewinn_je_100_dollar']:+.3f} $ per 100 $ staked, "
+              f"95 %: {s_['95_von']:+.3f} to {s_['95_bis']:+.3f}"]
     return "\n".join(z)

@@ -210,9 +210,9 @@ def brier(kuebel: int = Query(5, ge=2, le=20)):
                 " ON r.market_ticker = j.market_ticker AND r.observed_at = j.t"
                 " WHERE r.k_bid IS NOT NULL AND r.k_ask IS NOT NULL")]
         except sqlite3.OperationalError:
-            return {"ok": False, "grund": "noch kein Beobachtungsbuch"}
+            return {"ok": False, "grund": "no ledger yet"}
     if not rows:
-        return {"ok": False, "grund": "keine Beobachtungen"}
+        return {"ok": False, "grund": "no observations"}
 
     aus = _ergebnisse([r["market_ticker"] for r in rows])
     paare = [(float(r["fair_prob"]),
@@ -220,7 +220,7 @@ def brier(kuebel: int = Query(5, ge=2, le=20)):
               aus[r["market_ticker"]], r["sport_key"])
              for r in rows if r["market_ticker"] in aus]
     if len(paare) < 5:
-        return {"ok": False, "grund": "zu wenige abgerechnete Ereignisse",
+        return {"ok": False, "grund": "too few settled events",
                 "beobachtet": len(rows), "abgerechnet": len(paare)}
 
     unser = [(p, y) for p, _, y, _ in paare]
@@ -243,9 +243,9 @@ def brier(kuebel: int = Query(5, ge=2, le=20)):
             "kalibrierung": _kalibrierung(unser, kuebel),
             "je_gruppe": je_gruppe,
             "paarvergleich": _paarvergleich(unser, markt),
-            "lesart": ("Nicht der eigene Brier zaehlt - ein Wert nahe null ist "
-                       "unerreichbar, weil die Ungewissheit des Ereignisses die "
-                       "Untergrenze setzt. Entscheidend ist der Paarvergleich.")}
+            "lesart": ("Your own Brier is not the measure. A value near zero is "
+                       "unreachable, because the randomness of the events sets the "
+                       "floor. Only the paired comparison decides.")}
 
 
 @app.get("/api/weather/report")
@@ -360,12 +360,11 @@ def edges(einsatz: float = Query(100.0, gt=0, le=100000),
             "beobachtet": len(zeilen), "bewertbar": len(mit),
             "verdaechtig": sum(1 for z in mit if z.get("verdaechtig")),
             "hinweis": (
-                f"Sortiert nach Abweichung, nicht nach Gewinnwahrscheinlichkeit. "
-                f"unser_anteil_pct zeigt, wie gross die Order gegen die "
-                f"Warteschlange waere - unter 1 Prozent wird praktisch nie "
-                f"ausgefuehrt. Zeilen ueber {VERDACHT_PP:.0f} pp sind als "
-                f"verdaechtig markiert; dort ist der eigene Modellfehler "
-                f"wahrscheinlicher als ein Fehler des Marktes."),
+                f"Sorted by deviation, not by win probability. "
+                f"unser_anteil_pct is how large the order would be against the "
+                f"queue ahead of it - below 1 percent it will effectively never "
+                f"fill. Rows above {VERDACHT_PP:.0f} pp are flagged as suspect; "
+                f"there your own model error is more likely than the market's."),
             "zeilen": mit[:limit]}
 
 
@@ -378,7 +377,7 @@ def observations(limit: int = Query(60, ge=1, le=500), art: str = Query("sport")
                 f"SELECT * FROM {tabelle} ORDER BY observed_at DESC, id DESC LIMIT ?",
                 (limit,))]}
         except sqlite3.OperationalError:
-            return {"zeilen": [], "grund": "Tabelle existiert noch nicht"}
+            return {"zeilen": [], "grund": "table does not exist yet"}
 
 
 # --------------------------------------------------------------------------
