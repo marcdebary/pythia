@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Five measurement errors that kill AI pilots</title>
+<style>
+@page { size: A4; margin: 20mm 18mm 18mm 18mm; }
+@page :first { margin-top: 0; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body{
+  margin:0; font-family: "Charter","Georgia","Times New Roman",serif;
+  font-size:10.5pt; line-height:1.62; color:#1a1f28;
+}
+h1,h2,h3,.ui{ font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; }
+.cover{
+  height:297mm; margin:0 -18mm; padding:38mm 22mm 22mm;
+  background:#0f1826; color:#eef3fb; page-break-after:always;
+  display:flex; flex-direction:column;
+}
+.cover .brand{ font-size:9.5pt; letter-spacing:.22em; text-transform:uppercase;
+  color:#7f93b4; font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; }
+.cover h1{ font-size:31pt; line-height:1.14; margin:14mm 0 0; font-weight:700;
+  letter-spacing:-.015em; max-width:15cm; }
+.cover .sub{ font-size:13pt; color:#9fb3d1; margin-top:7mm; max-width:14cm;
+  line-height:1.5; }
+.cover .rule{ height:2px; background:#3d7dd8; width:70px; margin:11mm 0; }
+.cover .body{ font-size:10.5pt; color:#c3d1e6; max-width:13.5cm; }
+.cover .foot{ margin-top:auto; font-size:9pt; color:#7f93b4;
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; line-height:1.7; }
+
+h2{ font-size:15pt; margin:0 0 1mm; letter-spacing:-.01em; }
+h2 .no{ color:#3d7dd8; margin-right:8px; }
+h3{ font-size:10pt; text-transform:uppercase; letter-spacing:.1em;
+  color:#6b7a91; margin:7mm 0 2mm; font-weight:700; }
+p{ margin:0 0 3.4mm; }
+.lead{ font-size:11.5pt; color:#3a4658; margin-bottom:6mm; }
+section{ page-break-inside:avoid; margin-bottom:9mm; }
+.err{ border-top:2px solid #0f1826; padding-top:4mm; margin-bottom:10mm;
+  page-break-inside:avoid; }
+.tag{ font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-size:8.5pt;
+  letter-spacing:.14em; text-transform:uppercase; color:#3d7dd8;
+  font-weight:700; margin-bottom:1.5mm; }
+.case{ background:#f4f7fb; border-left:3px solid #3d7dd8; padding:4mm 5mm;
+  margin:4mm 0; font-size:9.8pt; }
+.case b{ font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:8.5pt; letter-spacing:.1em; text-transform:uppercase;
+  color:#5a6b85; display:block; margin-bottom:1.5mm; font-weight:700; }
+.num{ font-family:"SF Mono",Menlo,Consolas,monospace; font-size:9pt; letter-spacing:-.03em; }
+.check{ font-size:9.8pt; color:#2b3646; }
+.check b{ color:#0f1826; }
+table{ width:100%; border-collapse:collapse; font-size:9.6pt; margin:4mm 0; }
+th{ text-align:left; font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:8.5pt; letter-spacing:.08em; text-transform:uppercase;
+  color:#6b7a91; border-bottom:1.5px solid #0f1826; padding:2mm 3mm 1.5mm; }
+td{ padding:2.2mm 3mm; border-bottom:.5px solid #dde4ee; vertical-align:top; }
+td.r{ text-align:right; font-family:"SF Mono",Menlo,Consolas,monospace; font-size:8.8pt; letter-spacing:-.03em; }
+.steps{ counter-reset:s; margin:5mm 0; padding:0; list-style:none; }
+.steps li{ counter-increment:s; position:relative; padding-left:11mm;
+  margin-bottom:4mm; }
+.steps li::before{ content:counter(s); position:absolute; left:0; top:.2mm;
+  width:7mm; height:7mm; border-radius:50%; background:#0f1826; color:#fff;
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-size:9pt;
+  font-weight:700; display:flex; align-items:center; justify-content:center; }
+.steps b{ font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-size:10pt; }
+.close{ background:#0f1826; color:#eef3fb; padding:7mm 8mm; margin:8mm -4mm 0;
+  page-break-inside:avoid; }
+.close h2{ color:#fff; margin-bottom:3mm; }
+.close p{ color:#c3d1e6; }
+.close a{ color:#7fb0f2; }
+.sig{ margin-top:6mm; font-size:9pt; color:#6b7a91;
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; line-height:1.7; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="brand">DE BARY LLC · Austin, Texas</div>
+  <h1>Five measurement errors that kill AI pilots</h1>
+  <div class="rule"></div>
+  <div class="sub">Why the pilot looked good, and the rollout did not.</div>
+  <p class="body">
+    Every one of these was found in our own work, in a single week, on a system
+    we built ourselves. Four of the five were <em>our</em> errors, caught by our
+    own checks before they cost anything. That is the point: these are not
+    mistakes other people make.
+  </p>
+  <p class="body" style="margin-top:6mm">
+    The worked example is public and reproducible — every figure in this
+    document can be recomputed from source at
+    <span style="color:#7fb0f2">github.com/marcdebary/pythia</span>.
+  </p>
+  <div class="foot">
+    A short paper on evaluating automation before you scale it.<br>
+    DE BARY LLC · debary.us · rent-an-agent.ai
+  </div>
+</div>
+
+<section>
+<h2>The problem with a good demo</h2>
+<p class="lead">
+  A pilot is usually judged by watching it work. Someone runs ten examples, nine
+  look right, and the decision is made. Then it goes into production and the
+  benefit does not appear.
+</p>
+<p>
+  Nothing went wrong in the rollout. The measurement was wrong at the start.
+  Ten examples cannot distinguish a system that is genuinely better from one
+  that is merely agreeable, and "it looked right" is not a baseline.
+</p>
+<p>
+  We recently spent a week building a system to answer one narrow question:
+  does a particular pricing signal beat a live market? The answer turned out to
+  be no — three separate strategies, each disproved with a number. But the more
+  useful output was the list of ways we nearly fooled ourselves along the way.
+  Those five failure modes are not specific to pricing. They are how automation
+  projects go wrong in general.
+</p>
+</section>
+
+<div class="err">
+<div class="tag">Error one</div>
+<h2><span class="no">1</span>Counting the same thing twice</h2>
+<p>
+  We had 245 measurements and treated them as 245 independent results. They were
+  not. They were 46 events, each observed about five times. Repeated looks at the
+  same event are not new evidence — but they make a statistic look five times
+  more certain than it is.
+</p>
+<div class="case">
+  <b>What it did to the number</b>
+  Counting every row, the result was <span class="num">+$0.66</span> per $100
+  with a confidence interval of <span class="num">+0.46 to +0.86</span> — a clear
+  win. Counting one result per event, as you would actually act on it, the same
+  data gave <span class="num">+$0.31</span> with an interval of
+  <span class="num">−0.05 to +0.67</span>. The interval now includes zero. The
+  effect had not changed; only the honesty of the count had.
+</div>
+<h3>In your business</h3>
+<p>
+  A support assistant is evaluated on 500 tickets — but they come from 60
+  customers, and one customer's tickets all look alike. A document tool is tested
+  on 200 pages from 12 contracts. A forecasting model is scored on 12 months of
+  daily data that is really 12 independent months. In each case the sample is far
+  smaller than it appears, and the confidence is borrowed.
+</p>
+<p class="check">
+  <b>The check:</b> ask what the independent unit actually is — the customer, the
+  contract, the month — and count those. If the number drops by a factor of five,
+  your certainty should drop with it.
+</p>
+</div>
+
+<div class="err">
+<div class="tag">Error two</div>
+<h2><span class="no">2</span>An assumption dressed as a result</h2>
+<p>
+  Our model needed a value we did not have, so we estimated it and moved on. The
+  system then reported an enormous advantage in one location. It was not an
+  advantage; it was the estimate, reflected back at us as if it were a finding.
+</p>
+<div class="case">
+  <b>What it looked like</b>
+  The system reported an <span class="num">89 percentage point</span> edge in San
+  Francisco — an implausible figure that should have been read as an alarm, not
+  an opportunity. The cause: two forecast sources disagreed by 11 °F, and our
+  uncertainty estimate only knew about one of them. Once the disagreement between
+  sources was included, the edge disappeared entirely.
+</div>
+<h3>In your business</h3>
+<p>
+  A savings case rests on "we assume 20 % time saved." A routing model rests on an
+  assumed conversion rate. A staffing plan rests on an assumed error rate. The
+  assumption enters at the top and comes out of the bottom as a business case —
+  and by then nobody remembers it was a guess.
+</p>
+<p class="check">
+  <b>The check:</b> every assumed number is labelled as assumed, and the result is
+  recomputed at the plausible extremes. If the conclusion flips, you do not have a
+  business case — you have an opinion with arithmetic attached.
+</p>
+</div>
+
+<div class="err">
+<div class="tag">Error three</div>
+<h2><span class="no">3</span>Silent failure</h2>
+<p>
+  The machine hosting our system restarted. The service came back and looked
+  healthy. It wrote nothing for twenty-nine hours, and nobody noticed — because a
+  log file goes quiet precisely when nothing is running. There was no error to
+  see. Absence does not raise alarms.
+</p>
+<div class="case">
+  <b>What it cost</b>
+  A day and a half of collection, which was exactly the data the scheduled
+  evaluation needed. The status indicator was green throughout. It was reporting
+  that the process was alive — not that it was doing anything.
+</div>
+<h3>In your business</h3>
+<p>
+  An integration stops receiving records after a credential expires. A nightly job
+  runs and processes an empty file. A classifier quietly falls back to a default
+  and labels everything the same way. Every dashboard stays green, because all of
+  them monitor liveness rather than output.
+</p>
+<p class="check">
+  <b>The check:</b> monitor the <em>age of the newest result</em>, not the health
+  of the process. "The last record is four minutes old" is a fact. "Service:
+  running" is not.
+</p>
+</div>
+
+<div class="err">
+<div class="tag">Error four</div>
+<h2><span class="no">4</span>Right, and still useless</h2>
+<p>
+  Our weather model was well calibrated: when it said 27 %, the event happened
+  about 23 % of the time. That is a genuinely good property, and we were pleased
+  with it. It was also irrelevant, because the market's forecast was three times
+  sharper on exactly the same events.
+</p>
+<div class="case">
+  <b>Calibrated is not the same as valuable</b>
+  Our error score was <span class="num">0.140</span>. The benchmark we were trying
+  to beat scored <span class="num">0.041</span>. Both were honest; one was far
+  more decisive. Acting on ours would have lost
+  <span class="num">$81 per $100</span> staked.
+</div>
+<h3>In your business</h3>
+<p>
+  A model that predicts churn accurately but only flags customers your account
+  managers had already flagged. A document classifier that is 94 % accurate on a
+  task where one rule of thumb gets 93 %. A forecast that is unbiased and too
+  vague to schedule against. Accuracy against the truth is the wrong comparison.
+  The right one is accuracy against <em>what you would have done anyway</em>.
+</p>
+<p class="check">
+  <b>The check:</b> always score the new system and the current process on the
+  same cases, side by side. Not against perfection — against the incumbent,
+  including the boring incumbent of "an experienced person guessing."
+</p>
+</div>
+
+<div class="err">
+<div class="tag">Error five</div>
+<h2><span class="no">5</span>Value you cannot actually capture</h2>
+<p>
+  This one is the most expensive, and the easiest to miss, because the analysis is
+  correct right up to the end. We found a real, statistically defensible pricing
+  advantage. We then checked whether we could ever have acted on it. We could not.
+</p>
+<div class="case">
+  <b>The number that ended it</b>
+  Ahead of our order in the queue sat a median of
+  <span class="num">71,589</span> contracts; our order was
+  <span class="num">188</span>. Of 46 attempts, 12 were filled — and the ones that
+  filled had a <em>negative</em> edge (<span class="num">−0.090</span>) while the
+  ones that never filled had a positive one (<span class="num">+0.179</span>). We
+  were served only when the market had already moved against us.
+</div>
+<h3>In your business</h3>
+<p>
+  The tool saves four minutes per case, but the person still waits for the next
+  case to arrive, so the hour is not recovered. The model identifies 300 upsell
+  candidates and the team can call thirty. The automation clears the queue by noon
+  and the downstream department still batches once a day. The benefit is real on
+  the page and never lands in the accounts.
+</p>
+<p class="check">
+  <b>The check:</b> before measuring the benefit, describe the mechanism by which
+  it becomes money or time — who does what differently, and what constraint
+  absorbs the slack. If nobody's day changes, nothing has been saved.
+</p>
+</div>
+
+<section>
+<h2>The order the questions must be asked in</h2>
+<p class="lead">
+  Most evaluations start at step four. That is the mistake that produces confident
+  wrong answers.
+</p>
+<ol class="steps">
+  <li><b>Is it calibrated?</b> When it says 70 %, does it happen roughly 70 % of
+    the time? A system that cannot be trusted at face value cannot be reasoned
+    about at all, and every number after this one is decoration.</li>
+  <li><b>Is it better than what you do now?</b> Scored on identical cases, against
+    the actual incumbent. This is where most pilots quietly end — and finding that
+    out in week two is worth far more than finding it out in year two.</li>
+  <li><b>Is the difference larger than the noise?</b> With the sample counted
+    honestly. Small real differences need more evidence than anyone expects, and
+    "it seems better" is not evidence.</li>
+  <li><b>Can you capture it?</b> Through a named mechanism, against a named
+    constraint. This is the question that decides whether the project pays for
+    itself.</li>
+</ol>
+<p>
+  None of this requires exotic tooling. It requires the discipline to run the
+  steps in order, and the willingness to accept a "no" at step two.
+</p>
+</section>
+
+<section>
+<h2>Why our answer to "does it work?" is worth something</h2>
+<p>
+  Anyone can show you a system that succeeded. The harder credential is a system
+  that was measured honestly and reported a failure — including the measurer's own
+  errors.
+</p>
+<table>
+  <tr><th>Hypothesis tested</th><th>Verdict</th><th style="text-align:right">Evidence</th></tr>
+  <tr><td>Buy when the reference price is higher</td><td>Rejected</td>
+      <td class="r">−0.49 pp against a 4.00 pp cost hurdle</td></tr>
+  <tr><td>Post passively and collect the spread</td><td>Rejected</td>
+      <td class="r">12 of 46 filled; the filled ones were the bad ones</td></tr>
+  <tr><td>Move to markets where execution is easy</td><td>Rejected</td>
+      <td class="r">error 0.140 vs the benchmark's 0.041</td></tr>
+</table>
+<p>
+  Three plausible ideas, three weeks of runway saved, and no funded account lost
+  proving it the expensive way. The code, the data model, the checks and the
+  mistakes are all public.
+</p>
+</section>
+
+<div class="close">
+<h2>What we do</h2>
+<p>
+  DE BARY LLC builds and operates the execution layer for AI workflows — your
+  workload, in your container, with your data staying where it is. We also do the
+  unglamorous part that determines whether any of it was worth doing: measuring,
+  before you scale, whether the thing actually beats what you already have.
+</p>
+<p style="margin-bottom:0">
+  If you have a pilot that looked good and has not yet paid for itself, that is
+  exactly the conversation we are useful for.
+</p>
+<div class="sig" style="color:#8ba3c4">
+  <b style="color:#eef3fb">Marc de Bary</b> · DE BARY LLC · Austin, Texas<br>
+  debary.us · rent-an-agent.ai · <span style="color:#7fb0f2">github.com/marcdebary/pythia</span>
+</div>
+</div>
+
+</body>
+</html>

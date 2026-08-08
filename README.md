@@ -15,8 +15,32 @@ Most tools sell you signals. This one is built to disprove them. Asking question
 3 before questions 1 and 2 is the mistake that costs money, and the code is
 arranged so you cannot make it.
 
-**Pythia does not trade.** The order-placement methods are *removed* from the
-exchange client, not disabled. A test asserts they stay removed.
+---
+
+## The boundary is verifiable, not promised
+
+**Pythia cannot trade.** Not "trading is switched off" — `place_order` and
+`cancel_order` are *deleted* from the exchange client, and a test walks every
+shipped module and fails if they reappear.
+
+That distinction is the point. A configuration flag is a promise: someone can
+flip it, including by accident. In the predecessor to this code, someone did.
+A capability that does not exist in the source cannot be triggered, cannot be
+misconfigured, and cannot be argued about.
+
+```
+$ docker exec pythia-api python -c \
+    "from lib.kalshi import KalshiClient as K; print(hasattr(K,'place_order'))"
+False
+```
+
+Everything else follows the same rule. The ledger is append-only because SQLite
+triggers reject `UPDATE` and `DELETE`, not because a comment asks nicely. The
+container runs as UID 10001 because it never needs more. Your data is one SQLite
+file in a directory you own; nothing is shipped anywhere.
+
+This is what a trustworthy container boundary looks like: **stated as a
+constraint, enforced by the build, and checkable in one command.**
 
 ---
 
@@ -203,12 +227,41 @@ than an accident.
 - [docs/FINDINGS.md](docs/FINDINGS.md) — the three disproved hypotheses, with the numbers
 - [docs/METHODOLOGY.md](docs/METHODOLOGY.md) — how each measurement works and why
 - [docs/DEPLOY.md](docs/DEPLOY.md) — exposing the dashboard through a Cloudflare tunnel
+- [Five measurement errors that kill AI pilots](docs/DE-BARY-Five-Measurement-Errors.pdf) —
+  the same five failure modes, written for people deciding whether to scale an
+  automation project rather than for people reading code
+
+---
+
+## What this is actually a demonstration of
+
+There are more than thirty open-source Kalshi bots. The honest summary of that
+ecosystem, written by people cataloguing it: *"they give you plumbing but not a
+proven edge, and most traders lose money regardless of tooling."*
+
+Pythia is not the thirty-first. It does the part everyone skips — it tries to
+**disprove** the edge, and it reports the attempt whether or not the answer is
+convenient. The failure modes it caught are not specific to betting:
+
+| What went wrong here | What it is called everywhere else |
+|---|---|
+| 245 rows counted as 245 independent bets — they were 46 games | inflated sample, invented significance |
+| a guessed constant produced an 89-point "edge" | an assumption presenting itself as a result |
+| the service ran for 29 hours writing nothing | silent failure; the log goes quiet exactly when it matters |
+| calibrated, but not sharp | the model is right and still useless |
+| a real edge that could never be filled | value on paper that cannot be captured |
+
+Every one of those is a way an automation pilot fails in production. The
+discipline transfers; the sport does not.
 
 ---
 
 ## Licence and origin
 
-MIT. Built and operated by **DE BARY LLC**.
+MIT. Built and operated by **DE BARY LLC** (Austin, TX) — the privacy-first
+execution layer for AI workflows. Pythia is a reference implementation of that
+idea: your workload, your container, your data stays yours, and the limits are
+provable rather than promised.
 
 Pythia began as a fork of an LLM-driven trading bot. That bot could not beat the
 market either — across 1,882 resolved events, and a λ-sweep over the blend
