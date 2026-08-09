@@ -208,7 +208,35 @@ And it will tell you when those two rankings disagree:
 That happens when a forecast errs systematically in the cheaper direction. Any
 tool that optimises accuracy alone gets this backwards — and most do.
 
-Try it without your own data: `GET /api/forecast/demo`.
+### Validated on real professional forecasts
+
+The bundled `beispiele/spf_bip.csv` holds 145 quarters of the Federal Reserve
+Bank of Philadelphia's *Survey of Professional Forecasters* — the median of some
+forty full-time economists — against the first-release US nominal GDP they were
+aiming at.
+
+| Horizon | MASE | vs "last value" | vs "last value + average change" |
+|---|---|---|---|
+| current quarter | 0.334 | **clearly better** | **clearly better** |
+| one quarter out | 0.610 | **clearly better** | inconclusive |
+| two quarters out | 0.921 | inconclusive | **worse** |
+
+Two quarters out, forty paid economists lose to a two-line ruler — demonstrably,
+in 71 of 100 quarters, with an interval of +44.3 to +107.2. The value of a
+forecast collapses to the value of a straight edge somewhere between one and two
+quarters.
+
+That is professionals with decades of practice, on a smooth national aggregate.
+A single company's revenue is noisier, so the wall comes *sooner*, not later.
+
+The same file also demonstrates the trap that had to be fixed to get there: the
+first attempt scored those forecasts against *today's revised* GDP and found an
+8 % error in the 1990s. That was not forecaster error — nominal GDP has been
+redefined retroactively several times since. The check: **make sure the actual
+you score against is the one the forecaster was aiming at.**
+
+Try it without your own data: `GET /api/forecast/demo`, or see
+[beispiele/README.md](beispiele/README.md).
 
 ---
 
