@@ -1,7 +1,17 @@
 # Pythia
 
-**A measurement instrument for prediction markets. It tells you whether an edge
-exists — and it is usually honest enough to say no.**
+**A calibrated instrument for the question "is this forecast actually better
+than what we already do?" — honest enough to answer no.**
+
+It was calibrated on the hardest case that exists: a liquid betting exchange,
+where 99.5 % of the variance is irreducible noise and a paid adversary sets the
+price. It correctly reported *nothing there*. On weather markets — same
+exchange, same participants — it measured that the market captures 65.5 % of
+what is available. **The instrument reads zero on an empty plate and reads the
+signal when there is one.**
+
+That is what makes it usable on business forecasts, where nobody has ever
+checked.
 
 Pythia compares an independent reference price against a live exchange order
 book, records both in an append-only ledger, and then answers three questions in
@@ -146,6 +156,8 @@ market moved against you. Every edge figure carries the queue depth next to it.
 | `GET /api/edges` | Where does the price deviate most, and would an order fill? |
 | `GET /api/observations` | The raw ledger. |
 | `GET /api/status` | Is collection still alive? |
+| `POST /api/forecast/evaluate` | **Does your forecast beat a naive baseline?** Send a CSV. |
+| `GET /api/forecast/demo` | The same, on the bundled example. |
 
 `GET /api/edges?einsatz=100` sizes the hypothetical order and reports what
 fraction of the price level it would represent. Below 1 % it will effectively
@@ -154,6 +166,49 @@ never fill — that column is why most rows are not opportunities.
 Rows deviating by more than 15 pp are flagged `verdaechtig`. Against a market
 turning over six figures a day, your own model error is far more likely than the
 market's.
+
+---
+
+## Business forecasts
+
+The same four questions, applied to a spreadsheet instead of an order book:
+
+```bash
+curl --data-binary @your_data.csv \
+  "localhost:8300/api/forecast/evaluate?kosten_zu_hoch=0.12&kosten_zu_niedrig=0.45"
+```
+
+CSV columns: `periode, ist, <your_forecast>` — optionally `gruppe` for several
+series in one file, and further columns for competing methods.
+
+**1. Is it biased?** MASE compares against "last period" — below 1 means better
+than doing nothing. Bias is reported separately from noise, because bias can be
+removed with one multiplication and noise cannot. The tool computes that
+correction for you, using only information available *before* each period.
+
+**2. Does it beat a naive baseline, demonstrably?** Paired, on identical
+periods, with a moving-block bootstrap — because consecutive periods are
+correlated and an ordinary standard error would be far too narrow. Same
+discipline that turned 245 apparent observations into 46 real ones on the
+betting side.
+
+**3. What does the error cost?** Over- and under-forecasting are almost never
+equally expensive. Give the two costs and the tool ranks by money, not by
+accuracy.
+
+And it will tell you when those two rankings disagree:
+
+```
+!! THE MOST ACCURATE FORECAST IS NOT THE CHEAPEST
+   Smallest error:  plan, de-biased
+   Smallest cost:   plan
+   The more accurate route costs +91,380 MORE.
+```
+
+That happens when a forecast errs systematically in the cheaper direction. Any
+tool that optimises accuracy alone gets this backwards — and most do.
+
+Try it without your own data: `GET /api/forecast/demo`.
 
 ---
 

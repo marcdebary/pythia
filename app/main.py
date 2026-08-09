@@ -27,8 +27,8 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Dict, List, Optional
 
-from fastapi import FastAPI, Query
-from fastapi.responses import FileResponse
+from fastapi import FastAPI, HTTPException, Query, Request
+from fastapi.responses import FileResponse, PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 
 from lib import fees as _fees
@@ -381,6 +381,57 @@ def observations(limit: int = Query(60, ge=1, le=500), art: str = Query("sport")
 
 
 # --------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# Geschaeftsprognosen — dasselbe Verfahren, anderer Gegenstand.
+#
+# Pythia wurde an Sportmaerkten geeicht: dort sind 99,5 % der Streuung reiner
+# Zufall, und das Instrument hat korrekt "nichts da" angezeigt. An
+# Wettermaerkten - gleiche Boerse, gleiche Teilnehmer - holt der Markt 65,5 %
+# des Holbaren. Der Unterschied liegt am Gegenstand, nicht an der Methode.
+#
+# Eine Absatz- oder Umsatzprognose ist dem Wetterfall aehnlicher: es gibt
+# Struktur, es sitzt niemand dagegen, und der Fehler wird nie korrigiert.
+# ---------------------------------------------------------------------------
+
+
+@app.post("/api/forecast/evaluate")
+async def forecast_evaluate(request: Request,
+                            saison: int = Query(12, ge=1, le=53),
+                            kosten_zu_hoch: Optional[float] = Query(None),
+                            kosten_zu_niedrig: Optional[float] = Query(None),
+                            format: str = Query("text")):
+    """CSV im Rumpf. Spalten: periode, ist, <prognose> [, gruppe, weitere].
+
+    Nichts wird gespeichert - die Datei wird gelesen, gerechnet, verworfen.
+    """
+    from lib import forecast_eval as fe
+    roh = (await request.body()).decode("utf-8", errors="replace")
+    if not roh.strip():
+        raise HTTPException(400, "leerer Rumpf - CSV erwartet")
+    try:
+        if format == "json":
+            return fe.auswerten(roh, saison, kosten_zu_hoch, kosten_zu_niedrig)
+        return PlainTextResponse(fe.bericht(roh, saison, kosten_zu_hoch,
+                                            kosten_zu_niedrig))
+    except ValueError as e:
+        raise HTTPException(400, str(e))
+
+
+@app.get("/api/forecast/demo")
+def forecast_demo(format: str = Query("text")):
+    """Das mitgelieferte Beispiel, damit sich das Verfahren ohne eigene Daten
+    ansehen laesst. Zwei Reihen: eine, bei der die Planzahl die Grundlinie
+    nicht nachweisbar schlaegt, und eine, bei der sie es klar tut."""
+    from lib import forecast_eval as fe
+    pfad = Path(os.environ.get("BEISPIEL_DIR", "/beispiele")) / "prognosen_beispiel.csv"
+    if not pfad.exists():
+        raise HTTPException(404, "Beispieldatei nicht gefunden")
+    roh = pfad.read_text(encoding="utf-8")
+    if format == "json":
+        return fe.auswerten(roh, 12, 0.12, 0.45)
+    return PlainTextResponse(fe.bericht(roh, 12, 0.12, 0.45))
+
+
 if WEB.exists():
     @app.get("/")
     def index():

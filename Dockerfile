@@ -16,13 +16,15 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY app/ /app/
 COPY web/ /web/
+COPY beispiele/ /beispiele/
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     DATA_DIR=/data \
-    WEB_DIR=/web
+    WEB_DIR=/web \
+    BEISPIEL_DIR=/beispiele
 
-RUN mkdir -p /data && chown -R pythia:pythia /data /app /web
+RUN mkdir -p /data && chown -R pythia:pythia /data /app /web /beispiele
 USER pythia
 
 EXPOSE 8000
