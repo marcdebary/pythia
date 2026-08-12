@@ -1,5 +1,6 @@
 """Tests fuer die Prognosepruefung. Kein Netz noetig - nur die Rechnung."""
 import math
+import random
 import statistics
 
 import pytest
@@ -177,6 +178,75 @@ def test_ungleiche_kosten_koennen_die_rangfolge_drehen():
     assert k_schief["kosten_gesamt"] < k_genau["kosten_gesamt"]   # und trotzdem billiger
 
 
+# ------------------------------------------------------------- Trendprobe
+def test_korrelation_liefert_band_und_urteil():
+    x = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0]
+    k = fe.korrelation(x, x)
+    assert k["r"] > 0.99 and k["schliesst_null_aus"] is True
+
+
+def test_korrelation_braucht_streuung():
+    assert fe.korrelation([1.0] * 8, list(range(8))) is None
+
+
+def test_trendprobe_entlarvt_zwei_unabhaengige_trends():
+    """Der Kernfall: zwei Reihen, die nur gemeinsam steigen. Die Staende
+    korrelieren fast perfekt, die Veraenderungen gar nicht."""
+    z = random.Random(11)
+    a = [100.0 + 3.0 * i + z.gauss(0, 1) for i in range(60)]
+    b = [500.0 + 9.0 * i + z.gauss(0, 4) for i in range(60)]   # eigenes Rauschen
+    p = fe.trendprobe(a, b)
+    assert p["staende"]["r"] > 0.95                    # sieht ueberzeugend aus
+    assert abs(p["a_gegen_lineal"]["r"]) > 0.95        # ... aber nur Kalender
+    assert p["echt"] is False                          # ... und haelt nicht
+    assert p["nur_trend"] is True
+    assert "NUR TREND" in p["urteil"]
+
+
+def test_trendprobe_laesst_echten_zusammenhang_stehen():
+    """Wenn die VERAENDERUNGEN gemeinsam laufen, ueberlebt der Befund."""
+    z = random.Random(12)
+    schocks = [z.gauss(0, 5) for _ in range(60)]
+    a, b = [100.0], [200.0]
+    for s in schocks[1:]:
+        a.append(a[-1] * (1 + (s + 2) / 100))
+        b.append(b[-1] * (1 + (s + 2) / 100 + z.gauss(0, 0.002)))
+    p = fe.trendprobe(a, b)
+    assert p["veraenderungen_enttrendet"]["schliesst_null_aus"] is True
+    assert p["veraenderungen_trenden"] is False
+    assert p["echt"] is True
+    assert p["nur_trend"] is False
+    assert "echter Zusammenhang" in p["urteil"]
+
+
+def test_trendprobe_braucht_genug_perioden():
+    assert fe.trendprobe([1.0, 2.0, 3.0], [1.0, 2.0, 3.0]) is None
+
+
+def test_treiberspalten_sind_keine_prognosen():
+    z = [f"{i},{100 + i},{102 + i},{5 * i}" for i in range(20)]
+    d = fe.reihe_aus_csv(csv_aus(z, "periode,ist,prognose,treiber_sp500"))
+    assert d["prognosen"] == ["prognose"]
+    assert d["treiber"] == ["treiber_sp500"]
+
+
+def test_treiber_allein_reicht_nicht():
+    z = [f"{i},{100 + i},{5 * i}" for i in range(20)]
+    with pytest.raises(ValueError, match="Prognosespalte"):
+        fe.reihe_aus_csv(csv_aus(z, "periode,ist,treiber_sp500"))
+
+
+def test_bericht_warnt_bei_scheinkorrelation():
+    z = random.Random(13)
+    zeilen = []
+    for i in range(60):
+        ist = 100.0 + 3.0 * i + z.gauss(0, 1)
+        zeilen.append(f"{i},{ist:.3f},{ist + 2:.3f},{500 + 9 * i + z.gauss(0, 4):.3f}")
+    t = fe.bericht(csv_aus(zeilen, "periode,ist,prognose,treiber_boerse"))
+    assert "NUR TREND" in t
+    assert "Granger" in t
+
+
 # ------------------------------------------------------------ Gesamtlauf
 def test_auswerten_liefert_alle_abschnitte():
     zeilen = [f"{i},{100 + i},{102 + i}" for i in range(30)]
@@ -186,17 +256,20 @@ def test_auswerten_liefert_alle_abschnitte():
     assert "prognose" in g["kennzahlen"]
     assert "prognose entzerrt" in g["kennzahlen"]
     assert any("gegen letzter Wert" in x for x in g["vergleiche"])
+    assert "_reihe_gegen_lineal" in g["trendproben"]
 
 
 def test_bericht_ist_text_und_nennt_die_reihenfolge():
     zeilen = [f"{i},{100 + i},{102 + i}" for i in range(30)]
     t = fe.bericht(csv_aus(zeilen), kosten_zu_hoch=1.0, kosten_zu_niedrig=1.0)
-    assert "1) IST DIE PROGNOSE UNVERZERRT?" in t
-    assert "2) SCHLAEGT SIE DIE STUMPFE GRUNDLINIE" in t
-    assert "3) WAS KOSTET DER FEHLER?" in t
-    assert t.index("1) IST") < t.index("2) SCHLAEGT") < t.index("3) WAS KOSTET")
+    assert "1) STECKT ETWAS DRIN AUSSER DEM TREND?" in t
+    assert "2) IST DIE PROGNOSE UNVERZERRT?" in t
+    assert "3) SCHLAEGT SIE DIE STUMPFE GRUNDLINIE" in t
+    assert "4) WAS KOSTET DER FEHLER?" in t
+    assert (t.index("1) STECKT") < t.index("2) IST")
+            < t.index("3) SCHLAEGT") < t.index("4) WAS KOSTET"))
 
 
 def test_ohne_kosten_kein_geldabschnitt():
     zeilen = [f"{i},{100 + i},{102 + i}" for i in range(30)]
-    assert "3) WAS KOSTET" not in fe.bericht(csv_aus(zeilen))
+    assert "4) WAS KOSTET" not in fe.bericht(csv_aus(zeilen))

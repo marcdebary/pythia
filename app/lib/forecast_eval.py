@@ -17,22 +17,39 @@ niemand dagegen, und - der wichtigste Unterschied - **der Fehler wird nie
 korrigiert.** Ein Markt ist effizient, WEIL er staendig korrigiert wird. Eine
 Quartalsprognose wird das nie. Genau deshalb ist dort etwas zu holen.
 
-DIE VIER FRAGEN, IN DIESER REIHENFOLGE
+DIE FUENF FRAGEN, IN DIESER REIHENFOLGE
 
-  1. Ist die Prognose unverzerrt?     Liegt sie im Mittel richtig, oder
-                                      systematisch daneben?
-  2. Schlaegt sie eine stumpfe        "Letzter Monat" und "derselbe Monat im
-     Grundlinie?                      Vorjahr" kosten nichts. Wer die nicht
-                                      schlaegt, hat keine Prognose, sondern
-                                      Aufwand.
-  3. Ist der Unterschied groesser     Paarweise auf denselben Zeitraeumen, mit
-     als das Rauschen?                Fehlern, die die Autokorrelation
-                                      beruecksichtigen.
-  4. Was ist er wert?                 Erst wenn 1 bis 3 stehen. Mit den echten
-                                      Kosten von Ueber- und Unterschaetzung -
-                                      die sind fast nie gleich.
+  1. Steckt ueberhaupt etwas drin      Zwei Reihen, die beide ueber die Zeit
+     ausser dem Trend?                 steigen, korrelieren fast immer stark -
+                                       ganz gleich, ob sie miteinander zu tun
+                                       haben. Wer das nicht zuerst prueft,
+                                       misst den Kalender.
+  2. Ist die Prognose unverzerrt?      Liegt sie im Mittel richtig, oder
+                                       systematisch daneben?
+  3. Schlaegt sie eine stumpfe         "Letzter Monat" und "derselbe Monat im
+     Grundlinie?                       Vorjahr" kosten nichts. Wer die nicht
+                                       schlaegt, hat keine Prognose, sondern
+                                       Aufwand.
+  4. Ist der Unterschied groesser      Paarweise auf denselben Zeitraeumen, mit
+     als das Rauschen?                 Fehlern, die die Autokorrelation
+                                       beruecksichtigen.
+  5. Was ist er wert?                  Erst wenn 1 bis 4 stehen. Mit den echten
+                                       Kosten von Ueber- und Unterschaetzung -
+                                       die sind fast nie gleich.
 
-Frage 4 zuerst zu stellen ist der teure Fehler. Genau wie an der Boerse.
+Frage 5 zuerst zu stellen ist der teure Fehler. Genau wie an der Boerse.
+
+ZUR TRENDPROBE (FRAGE 1)
+
+Granger und Newbold haben 1974 gezeigt, dass zwei voellig unabhaengige
+Zeitreihen mit Trend fast immer stark korrelieren ("spurious regression").
+Die Probe ist einfach: dieselbe Korrelation gegen eine Reihe rechnen, die nur
+steigt und sonst nichts enthaelt - 1, 2, 3, 4, ... Bleibt die Zahl gross,
+misst man den Kalender und nicht den Zusammenhang.
+
+Gemessener Fall: S&P 500 gegen US-Nominal-BIP, 40 Quartale, Korrelation der
+Staende +0,95. Dasselbe BIP gegen die reine Gerade: +0,98. Korrelation der
+Quartalsveraenderungen: -0,09, Band -0,39 bis +0,24. Es war der Kalender.
 
 ZU MASE
 
@@ -59,7 +76,8 @@ from typing import Dict, List, Optional, Sequence, Tuple
 
 __all__ = [
     "reihe_aus_csv", "grundlinien", "kennzahlen", "paarvergleich",
-    "kostenrechnung", "entzerrt", "auswerten", "bericht",
+    "kostenrechnung", "entzerrt", "korrelation", "trendprobe",
+    "auswerten", "bericht",
 ]
 
 BOOTSTRAP_ZIEHUNGEN = 4000
@@ -75,6 +93,11 @@ def reihe_aus_csv(text: str) -> Dict:
     mehrere Verfahren nebeneinander pruefen lassen. Eine Spalte `gruppe`
     kennzeichnet mehrere Reihen in einer Datei (Artikel, Region, Standort) -
     dann werden die Fehler je Gruppe geklumpt, statt sie zu vermischen.
+
+    Spalten, deren Name mit `treiber` beginnt, sind keine Prognosen, sondern
+    vermutete Einflussgroessen (Auftragseingang, Rohstoffpreis, Konjunktur-
+    index, Werbebudget). Sie werden nicht auf Genauigkeit geprueft, sondern
+    auf die Frage: haengt die Reihe wirklich daran - oder steigen nur beide?
     """
     f = csv.DictReader(io.StringIO(text.strip()))
     if not f.fieldnames:
@@ -82,7 +105,9 @@ def reihe_aus_csv(text: str) -> Dict:
     spalten = [s.strip().lower() for s in f.fieldnames]
     if "periode" not in spalten or "ist" not in spalten:
         raise ValueError("Spalten 'periode' und 'ist' werden gebraucht")
-    prognosespalten = [s for s in spalten if s not in ("periode", "ist", "gruppe")]
+    uebrig = [s for s in spalten if s not in ("periode", "ist", "gruppe")]
+    treiberspalten = [s for s in uebrig if s.startswith("treiber")]
+    prognosespalten = [s for s in uebrig if not s.startswith("treiber")]
     if not prognosespalten:
         raise ValueError("mindestens eine Prognosespalte wird gebraucht")
 
@@ -95,7 +120,7 @@ def reihe_aus_csv(text: str) -> Dict:
         except (TypeError, ValueError):
             continue                     # noch nicht eingetreten - ueberspringen
         z = {"periode": r["periode"], "gruppe": r.get("gruppe") or "gesamt", "ist": ist}
-        for s in prognosespalten:
+        for s in prognosespalten + treiberspalten:
             try:
                 z[s] = float(r[s])
             except (TypeError, ValueError, KeyError):
@@ -105,6 +130,7 @@ def reihe_aus_csv(text: str) -> Dict:
         raise ValueError(f"zu wenige auswertbare Zeilen ({len(zeilen)}), "
                          f"mindestens 8 werden gebraucht")
     return {"zeilen": zeilen, "prognosen": prognosespalten,
+            "treiber": treiberspalten,
             "gruppen": sorted({z["gruppe"] for z in zeilen})}
 
 
@@ -159,6 +185,136 @@ def entzerrt(prognose: Sequence[Optional[float]], ist: Sequence[float],
         versatz = statistics.fmean(pp - aa for pp, aa in frueher)
         aus.append(p - versatz)
     return aus
+
+
+# ---------------------------------------------------------------------------
+# Trendprobe - Frage 1
+# ---------------------------------------------------------------------------
+def korrelation(a: Sequence[float], b: Sequence[float],
+                verbrauchte_freiheitsgrade: int = 0) -> Optional[Dict]:
+    """Pearson mit 95%-Band nach Fisher. None, wenn nicht rechenbar.
+
+    `verbrauchte_freiheitsgrade` zaehlt, was vorher aus beiden Reihen
+    herausgerechnet wurde (etwa ein Trend). Das Band wird dadurch breiter -
+    wer erst entzerrt und dann so tut, als haette er die vollen Daten, gibt
+    sich ein zu schmales Band.
+    """
+    n = min(len(a), len(b))
+    if n - verbrauchte_freiheitsgrade < 4:
+        return None
+    a, b = list(a[:n]), list(b[:n])
+    ma, mb = statistics.fmean(a), statistics.fmean(b)
+    sa, sb = statistics.pstdev(a), statistics.pstdev(b)
+    if sa == 0 or sb == 0:
+        return None
+    r = statistics.fmean((x - ma) * (y - mb) for x, y in zip(a, b)) / (sa * sb)
+    r = max(-0.999999, min(0.999999, r))
+    se = 1.0 / math.sqrt(n - 3 - verbrauchte_freiheitsgrade)
+    z = 0.5 * math.log((1 + r) / (1 - r))
+    lo, hi = math.tanh(z - 1.96 * se), math.tanh(z + 1.96 * se)
+    return {
+        "r": round(r, 4), "95_von": round(lo, 4), "95_bis": round(hi, 4),
+        "n": n, "schliesst_null_aus": bool(lo > 0 or hi < 0),
+    }
+
+
+def _veraenderungen(x: Sequence[float]) -> List[float]:
+    """Von Periode zu Periode. Prozentual, wo es geht - sonst absolut."""
+    aus = []
+    for i in range(1, len(x)):
+        v = x[i - 1]
+        aus.append((x[i] / v - 1.0) * 100.0 if v not in (0, 0.0) else x[i] - v)
+    return aus
+
+
+def _ohne_trend(x: Sequence[float]) -> List[float]:
+    """Was uebrig bleibt, wenn man die gerade Linie herausrechnet.
+
+    Noetig, weil auch VERAENDERUNGEN noch trenden koennen. Eine streng linear
+    wachsende Reihe hat fallende Prozentveraenderungen - der Nenner waechst ja.
+    Zwei solche Reihen korrelieren dann in den Veraenderungen erneut, ohne
+    dass sie etwas miteinander zu tun haetten. Ein Schwellenwert wuerde hier
+    nur raten; herausrechnen ist die Antwort.
+    """
+    n = len(x)
+    if n < 3:
+        return list(x)
+    mi, mx = (n - 1) / 2.0, statistics.fmean(x)
+    nenner = sum((i - mi) ** 2 for i in range(n))
+    if nenner == 0:
+        return list(x)
+    steigung = sum((i - mi) * (v - mx) for i, v in enumerate(x)) / nenner
+    return [v - (mx + steigung * (i - mi)) for i, v in enumerate(x)]
+
+
+def trendprobe(a: Sequence[float], b: Sequence[float]) -> Optional[Dict]:
+    """Ist der Zusammenhang zwischen a und b echt - oder nur gemeinsamer Trend?
+
+    Drei Zahlen, und die dritte entwertet meist die erste:
+
+      1. Korrelation der STAENDE a~b            - die grosse, beeindruckende Zahl
+      2. Korrelation der VERAENDERUNGEN         - die ehrliche Zahl
+      3. Korrelation beider gegen ein LINEAL    - der Beweis, ob 1 etwas heisst
+
+    Das Lineal ist die Reihe 1, 2, 3, 4, ... - reine Zeit, sonst nichts.
+    Korreliert eine der Reihen mit dem Lineal aehnlich stark wie mit der
+    anderen, dann misst Zahl 1 den Kalender.
+
+    Der Test kostet drei Zeilen und entlarvt den haeufigsten Fehler in der
+    angewandten Statistik ueberhaupt (Granger/Newbold 1974, "spurious
+    regression"). Er sieht ueberzeugender aus als jedes echte Ergebnis, weil
+    die Zahl so gross ist.
+    """
+    n = min(len(a), len(b))
+    if n < 6:
+        return None
+    a, b = list(a[:n]), list(b[:n])
+    lineal = [float(i) for i in range(n)]
+
+    stand = korrelation(a, b)
+    a_lineal = korrelation(a, lineal)
+    b_lineal = korrelation(b, lineal)
+    da, db = _veraenderungen(a), _veraenderungen(b)
+    aend = korrelation(da, db)
+    if stand is None or aend is None:
+        return None
+
+    # Dieselbe Probe eine Ebene tiefer: aus beiden Veraenderungsreihen wird
+    # der eigene Trend herausgerechnet, bevor sie verglichen werden. Diese
+    # Zahl entscheidet - nicht die darueber.
+    entt = korrelation(_ohne_trend(da), _ohne_trend(db),
+                       verbrauchte_freiheitsgrade=2)
+    if entt is None:
+        return None
+    echt = bool(entt["schliesst_null_aus"])
+    verdacht = bool(aend["schliesst_null_aus"] and not echt)
+    trendanteil = max(abs(a_lineal["r"]) if a_lineal else 0.0,
+                      abs(b_lineal["r"]) if b_lineal else 0.0)
+    nur_trend = bool(not echt and trendanteil >= 0.7 and abs(stand["r"]) >= 0.7)
+
+    if echt:
+        urteil = "echter Zusammenhang - haelt auch nach Abzug des Trends"
+    elif verdacht:
+        urteil = ("NUR TREND - auch die Veraenderungen trenden noch, "
+                  "nach Abzug bleibt nichts")
+    elif nur_trend:
+        urteil = "NUR TREND - die Korrelation der Staende misst den Kalender"
+    else:
+        urteil = "kein Zusammenhang nachweisbar"
+
+    return {
+        "n": n,
+        "staende": stand,
+        "a_gegen_lineal": a_lineal,
+        "b_gegen_lineal": b_lineal,
+        "veraenderungen": aend,
+        "veraenderungen_enttrendet": entt,
+        "veraenderungen_trenden": verdacht,
+        "erklaerter_anteil_pct": round(entt["r"] ** 2 * 100, 1),
+        "echt": echt,
+        "nur_trend": nur_trend,
+        "urteil": urteil,
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -277,6 +433,7 @@ def auswerten(csv_text: str, saison: int = 12,
     d = reihe_aus_csv(csv_text)
     zeilen = d["zeilen"]
     ergebnis: Dict = {"gruppen": {}, "prognosen": d["prognosen"],
+                      "treiber": d.get("treiber", []),
                       "saison": saison, "perioden": len(zeilen)}
 
     for gruppe in d["gruppen"]:
@@ -329,8 +486,26 @@ def auswerten(csv_text: str, saison: int = 12,
                 if len(gueltig) >= 6:
                     kosten[name] = kostenrechnung(gueltig, kosten_zu_hoch, kosten_zu_niedrig)
 
+        # Frage 1: steckt ueberhaupt etwas drin ausser dem Trend?
+        # Erst die Reihe selbst - wieviel davon ist blosser Kalender?
+        # Dann jede Prognose: die Staende sehen immer gut aus, die
+        # Veraenderungen entscheiden. Dann jede vermutete Einflussgroesse.
+        proben: Dict[str, Dict] = {}
+        lineal = [float(i) for i in range(len(ist))]
+        eigen = korrelation(ist, lineal)
+        if eigen:
+            proben["_reihe_gegen_lineal"] = eigen
+        for name in d["prognosen"] + d.get("treiber", []):
+            werte = [z.get(name) for z in g]
+            paar = [(w, ist[i]) for i, w in enumerate(werte) if w is not None]
+            if len(paar) < 6:
+                continue
+            p = trendprobe([w for w, _ in paar], [a for _, a in paar])
+            if p:
+                proben[name] = p
+
         ergebnis["gruppen"][gruppe] = {
-            "perioden": len(g), "kennzahlen": auswertung,
+            "perioden": len(g), "trendproben": proben, "kennzahlen": auswertung,
             "vergleiche": vergleiche, "kosten": kosten,
         }
     return ergebnis
@@ -345,7 +520,54 @@ def bericht(csv_text: str, saison: int = 12,
         titel = f"{gruppe}  ({g['perioden']} Perioden)"
         z += ["=" * 78, titel, "=" * 78, ""]
 
-        z += ["1) IST DIE PROGNOSE UNVERZERRT?",
+        proben = g.get("trendproben") or {}
+        if proben:
+            z += ["1) STECKT ETWAS DRIN AUSSER DEM TREND?"]
+            eigen = proben.get("_reihe_gegen_lineal")
+            if eigen:
+                z += [f"   Die Reihe selbst gegen ein reines Lineal (1,2,3,...): "
+                      f"{eigen['r']:+.4f}",
+                      "   Je naeher an 1, desto mehr ist die Reihe blosser Kalender -",
+                      "   und desto weniger kann eine Prognose ueberhaupt gewinnen.", ""]
+            spalten = [(n, p) for n, p in proben.items() if n != "_reihe_gegen_lineal"]
+            if spalten:
+                z += [f"   {'Spalte gegen Ist':>24} {'Staende':>9} {'gg.Lineal':>10} "
+                      f"{'Aenderung':>10} {'enttrendet':>11} {'95%-Band':>21} "
+                      f"{'erklaert':>9}"]
+                for name, p in spalten:
+                    st, ae, en = (p["staende"], p["veraenderungen"],
+                                  p["veraenderungen_enttrendet"])
+                    gl = p["a_gegen_lineal"]["r"] if p["a_gegen_lineal"] else 0.0
+                    z.append(f"   {name:>24} {st['r']:+9.4f} {gl:+10.4f} "
+                             f"{ae['r']:+10.4f} {en['r']:+11.4f} "
+                             f"{en['95_von']:+9.4f} bis {en['95_bis']:+7.4f} "
+                             f"{p['erklaerter_anteil_pct']:8.1f}%")
+                for name, p in spalten:
+                    if not p["nur_trend"]:
+                        continue
+                    en = p["veraenderungen_enttrendet"]
+                    z += ["",
+                          f"!! {name.upper()}: NUR TREND",
+                          f"   Die Staende korrelieren mit {p['staende']['r']:+.3f} - das sieht",
+                          "   ueberzeugend aus. Dieselbe Reihe korreliert aber mit "
+                          f"{abs(p['a_gegen_lineal']['r']):.3f}",
+                          "   auch mit einer Geraden, die nichts als Zeit enthaelt."]
+                    if p["veraenderungen_trenden"]:
+                        z += [f"   Auch die Veraenderungen trenden noch ({p['veraenderungen']['r']:+.3f}).",
+                              f"   Nach Abzug bleibt {en['r']:+.3f}, Band {en['95_von']:+.3f} "
+                              f"bis {en['95_bis']:+.3f} - die Null liegt drin."]
+                    else:
+                        z += [f"   Die Veraenderungen korrelieren mit {en['r']:+.3f}, Band "
+                              f"{en['95_von']:+.3f} bis {en['95_bis']:+.3f}.",
+                              "   Die Null liegt drin. Gemessen wurde der Kalender."]
+            z += ["",
+                  "   Zwei Reihen mit Trend korrelieren fast immer stark - auch wenn",
+                  "   sie nichts miteinander zu tun haben (Granger/Newbold 1974). Die",
+                  "   Spalte 'gg.Lineal' ist die Gegenprobe: reine Zeit, sonst nichts.",
+                  "   Entschieden wird in der Spalte 'enttrendet' - dort ist aus beiden",
+                  "   Veraenderungsreihen auch noch die eigene Steigung herausgerechnet.", ""]
+
+        z += ["2) IST DIE PROGNOSE UNVERZERRT?",
               f"   {'Verfahren':>22} {'MAE':>12} {'MASE':>8} {'Fehler %':>9} "
               f"{'Verzerrung':>12} {'davon syst.':>12}"]
         for name, k in sorted(g["kennzahlen"].items(), key=lambda x: x[1].get("mase") or 9):
@@ -362,7 +584,7 @@ def bericht(csv_text: str, saison: int = 12,
               "   Eine systematische Verzerrung ist die gute Nachricht - sie laesst",
               "   sich herausrechnen. Zufaelliger Fehler nicht.", ""]
 
-        z += ["2) SCHLAEGT SIE DIE STUMPFE GRUNDLINIE - UND IST ES NACHWEISBAR?",
+        z += ["3) SCHLAEGT SIE DIE STUMPFE GRUNDLINIE - UND IST ES NACHWEISBAR?",
               f"   {'Vergleich':>40} {'Unterschied MAE':>17} {'95%-Band':>22} {'besser in':>10}"]
         for name, v in g["vergleiche"].items():
             if "unterschied_mae" not in v:
@@ -399,7 +621,7 @@ def bericht(csv_text: str, saison: int = 12,
                       "   bessere sein. Wer nur auf Genauigkeit optimiert, macht es",
                       "   hier aktiv schlechter.", ""]
 
-            z += ["3) WAS KOSTET DER FEHLER?",
+            z += ["4) WAS KOSTET DER FEHLER?",
                   f"   {'Verfahren':>22} {'zu hoch':>14} {'zu niedrig':>14} "
                   f"{'gesamt':>14} {'je Periode':>13}"]
             for name, kk in sorted(g["kosten"].items(), key=lambda x: x[1]["kosten_gesamt"]):

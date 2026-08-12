@@ -63,6 +63,34 @@ gezielt hat. Er steht in der SPF-Datei selbst.
 den der Prognostiker treffen wollte.** Derselbe Fehlertyp wie beim Wetter, wo
 das Modellgitter nicht die Abrechnungsstation war.
 
+---
+
+## `spf_bip_mit_boerse.csv` — dieselben Daten plus eine Scheinkorrelation
+
+Dieselbe Datei, ergaenzt um eine Spalte `treiber_nasdaq` (Quartalsschluss des
+NASDAQ Composite). Spalten, deren Name mit `treiber` beginnt, werden nicht auf
+Genauigkeit geprueft, sondern auf die Frage: haengt die Reihe wirklich daran -
+oder steigen nur beide?
+
+```
+           Spalte gegen Ist   Staende  gg.Lineal  Aenderung  enttrendet     95%-Band
+          laufendes_quartal   +0.9998    +0.9730    +0.7012     +0.7012  +0.61 bis +0.78
+         ein_quartal_vorher   +0.9991    +0.9745    -0.1465     -0.1465  -0.30 bis +0.02
+       zwei_quartale_vorher   +0.9987    +0.9757    +0.1603     +0.1604  -0.00 bis +0.32
+             treiber_nasdaq   +0.9111    +0.8148    -0.0282     -0.0281  -0.19 bis +0.14
+```
+
+Alle vier Spalten korrelieren mit dem BIP zwischen 0,91 und 0,9998. Jede von
+ihnen korreliert aber auch mit einer Geraden, die nichts als Zeit enthaelt -
+das BIP selbst tut es mit 0,972.
+
+Sobald man die Veraenderungen vergleicht, bleibt nur die Schaetzung fuer das
+**laufende** Quartal stehen (+0,70). Ein und zwei Quartale im Voraus schliesst
+das Band die Null nicht mehr aus. Die Boerse erklaert **0,1 %**.
+
+Das ist derselbe Befund wie oben, auf anderem Weg: nach etwa einem Quartal ist
+die Information weg. Nur sieht man es hier direkt, ohne MASE.
+
 ### Quellen
 
 - Prognosen: [Survey of Professional Forecasters, Federal Reserve Bank of
