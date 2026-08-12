@@ -88,8 +88,20 @@ Sobald man die Veraenderungen vergleicht, bleibt nur die Schaetzung fuer das
 **laufende** Quartal stehen (+0,70). Ein und zwei Quartale im Voraus schliesst
 das Band die Null nicht mehr aus. Die Boerse erklaert **0,1 %**.
 
-Das ist derselbe Befund wie oben, auf anderem Weg: nach etwa einem Quartal ist
-die Information weg. Nur sieht man es hier direkt, ohne MASE.
+**Ein einziges Ereignis traegt diesen Teil des Befunds.** Ohne die vier
+Corona-Quartale kehrt sich das Vorzeichen um: dann liegen die enttrendeten
+Korrelationen bei +0,385 / +0,294 / +0,311, und alle drei schliessen die Null
+aus. In den Veraenderungen steckt also durchaus Information — 2020 hat sie nur
+ueberdeckt.
+
+Was davon unberuehrt bleibt, ist die Nuetzlichkeit: gegen die Regel "letzter
+Wert plus mittlere Veraenderung" verliert der Zwei-Quartals-Horizont auch ohne
+Corona, mit +74,7 und einem Band von +44,3 bis +107,2, besser in nur 28,8 % der
+Quartale. Ein nachweisbarer Zusammenhang und ein nuetzlicher Vorsprung sind
+zwei verschiedene Dinge.
+
+Wer nur eine der beiden Dateien rechnet, bekommt eine Haelfte der Wahrheit.
+Deshalb liegen beide bei.
 
 ### Quellen
 
