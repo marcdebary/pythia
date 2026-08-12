@@ -1,0 +1,17 @@
+year,actual_summer_peak_mw,date_or_month,basis,source_url
+2010,65776,August 2010,"Realized actual; ERCOT-wide integrated hourly system load; NOT weather-normalized",https://www.ercot.com/static-assets/data/news/content/a-peak-demand/records-yearly-archive.htm
+2011,68379,August 2011,"Realized actual; ERCOT-wide integrated hourly system load; NOT weather-normalized",https://www.ercot.com/static-assets/data/news/content/a-peak-demand/records-yearly-archive.htm
+2012,66548,June 2012,"Realized actual; annual peak occurred in June; ERCOT-wide integrated hourly system load",https://www.ercot.com/static-assets/data/news/content/a-peak-demand/records-yearly-archive.htm
+2013,67245,August 2013,"Realized actual; ERCOT-wide integrated hourly system load",https://www.ercot.com/static-assets/data/news/content/a-peak-demand/records-yearly-archive.htm
+2014,66454,August 2014,"Realized actual; ERCOT-wide integrated hourly system load",https://www.ercot.com/static-assets/data/news/content/a-peak-demand/records-yearly-archive.htm
+2015,69877,August 2015,"Realized actual; ERCOT-wide integrated hourly system load",https://www.ercot.com/static-assets/data/news/content/a-peak-demand/records-yearly-archive.htm
+2016,71110,August 2016,"Realized actual; ERCOT-wide integrated hourly system load",https://www.ercot.com/static-assets/data/news/content/a-peak-demand/records-yearly-archive.htm
+2017,69512,July 2017,"Realized actual; ERCOT-wide integrated hourly system load",https://www.ercot.com/static-assets/data/news/content/a-peak-demand/records-yearly-archive.htm
+2018,73473,July 2018,"Realized actual; ERCOT-wide integrated hourly system load",https://www.ercot.com/static-assets/data/news/content/a-peak-demand/records-yearly-archive.htm
+2019,74820,August 2019,"Realized actual; ERCOT-wide integrated hourly system load",https://www.ercot.com/static-assets/data/news/content/a-peak-demand/records-yearly-archive.htm
+2020,74376,August 2020,"Realized actual; ERCOT-wide integrated hourly system load",https://www.ercot.com/static-assets/data/news/content/a-peak-demand/records-yearly-archive.htm
+2021,73687,August 2021,"Realized actual; ERCOT-wide integrated hourly system load",https://www.ercot.com/static-assets/data/news/content/a-peak-demand/records-yearly-archive.htm
+2022,80148,2022-07-20,"Realized actual; ERCOT-wide integrated hourly system load",https://www.ercot.com/static-assets/data/news/content/a-peak-demand/records-yearly-archive.htm
+2023,85508,2023-08-10,"Realized actual; all-time ERCOT record as of Aug 2026",https://www.ercot.com/static-assets/data/news/content/a-peak-demand/records-yearly-archive.htm
+2024,85425,2024-08-20,"Realized actual; ERCOT-wide integrated hourly system load",https://www.ercot.com/static-assets/data/news/content/a-peak-demand/records-yearly-archive.htm
+2025,83679,2025-08-18 HE18,"Realized actual; ERCOT hourly native load archive (settled). NOT on ERCOT yearly-records page - see notes",https://www.ercot.com/files/docs/2025/02/11/Native_Load_2025.zip

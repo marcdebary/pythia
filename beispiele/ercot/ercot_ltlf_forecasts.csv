@@ -1,0 +1,22 @@
+forecast_vintage,published,forecast_year,summer_peak_mw,series,basis,source_url
+2025 LTLF,2025-04-08,2025,85759,ERCOT Adjusted Load Forecast,"50/50 normal-weather summer peak; incl. large loads after ERCOT haircuts (180-day delay; data centers cut to 49.8%; officer-letter loads cut to 55.4%)",https://www.ercot.com/files/docs/2025/04/08/2025-LTLF-Report.pdf
+2025 LTLF,2025-04-08,2026,94650,ERCOT Adjusted Load Forecast,"50/50 normal-weather summer peak",https://www.ercot.com/files/docs/2025/04/08/2025-LTLF-Report.pdf
+2025 LTLF,2025-04-08,2027,104295,ERCOT Adjusted Load Forecast,"50/50 normal-weather summer peak",https://www.ercot.com/files/docs/2025/04/08/2025-LTLF-Report.pdf
+2025 LTLF,2025-04-08,2028,121543,ERCOT Adjusted Load Forecast,"50/50 normal-weather summer peak",https://www.ercot.com/files/docs/2025/04/08/2025-LTLF-Report.pdf
+2025 LTLF,2025-04-08,2029,128851,ERCOT Adjusted Load Forecast,"50/50 normal-weather summer peak",https://www.ercot.com/files/docs/2025/04/08/2025-LTLF-Report.pdf
+2025 LTLF,2025-04-08,2030,138944,ERCOT Adjusted Load Forecast,"50/50 normal-weather summer peak",https://www.ercot.com/files/docs/2025/04/08/2025-LTLF-Report.pdf
+2025 LTLF,2025-04-08,2031,144522,ERCOT Adjusted Load Forecast,"50/50 normal-weather summer peak",https://www.ercot.com/files/docs/2025/04/08/2025-LTLF-Report.pdf
+2026 LTLF preliminary,2026-04-15,2026,98087,"Forecast (base econ + EV + PV + crypto + operational large load ramp)","Peak demand; excludes new TSP RFI large/medium loads",https://interchange.puc.texas.gov/Documents/58777_38_1622647.PDF
+2026 LTLF preliminary,2026-04-15,2027,100855,Forecast,"Peak demand; excludes new TSP RFI large/medium loads",https://interchange.puc.texas.gov/Documents/58777_38_1622647.PDF
+2026 LTLF preliminary,2026-04-15,2028,102420,Forecast,"Peak demand; excludes new TSP RFI large/medium loads",https://interchange.puc.texas.gov/Documents/58777_38_1622647.PDF
+2026 LTLF preliminary,2026-04-15,2029,105383,Forecast,"Peak demand; excludes new TSP RFI large/medium loads",https://interchange.puc.texas.gov/Documents/58777_38_1622647.PDF
+2026 LTLF preliminary,2026-04-15,2030,107287,Forecast,"Peak demand; excludes new TSP RFI large/medium loads",https://interchange.puc.texas.gov/Documents/58777_38_1622647.PDF
+2026 LTLF preliminary,2026-04-15,2031,108023,Forecast,"Peak demand; excludes new TSP RFI large/medium loads",https://interchange.puc.texas.gov/Documents/58777_38_1622647.PDF
+2026 LTLF preliminary,2026-04-15,2032,111318,Forecast,"Peak demand; excludes new TSP RFI large/medium loads",https://interchange.puc.texas.gov/Documents/58777_38_1622647.PDF
+2026 LTLF preliminary,2026-04-15,2026,112371,Forecast + Large Loads + Medium Loads,"Includes ALL TSP RFI-reported new medium (25-74.9 MW) and large (>=75 MW) loads at full requested capacity; ERCOT itself says this is likely inflated",https://interchange.puc.texas.gov/Documents/58777_38_1622647.PDF
+2026 LTLF preliminary,2026-04-15,2027,152882,Forecast + Large Loads + Medium Loads,"Includes all TSP RFI loads at full requested capacity",https://interchange.puc.texas.gov/Documents/58777_38_1622647.PDF
+2026 LTLF preliminary,2026-04-15,2028,221379,Forecast + Large Loads + Medium Loads,"Includes all TSP RFI loads at full requested capacity",https://interchange.puc.texas.gov/Documents/58777_38_1622647.PDF
+2026 LTLF preliminary,2026-04-15,2029,278003,Forecast + Large Loads + Medium Loads,"Includes all TSP RFI loads at full requested capacity",https://interchange.puc.texas.gov/Documents/58777_38_1622647.PDF
+2026 LTLF preliminary,2026-04-15,2030,319650,Forecast + Large Loads + Medium Loads,"Includes all TSP RFI loads at full requested capacity",https://interchange.puc.texas.gov/Documents/58777_38_1622647.PDF
+2026 LTLF preliminary,2026-04-15,2031,346715,Forecast + Large Loads + Medium Loads,"Includes all TSP RFI loads at full requested capacity",https://interchange.puc.texas.gov/Documents/58777_38_1622647.PDF
+2026 LTLF preliminary,2026-04-15,2032,367790,Forecast + Large Loads + Medium Loads,"Includes all TSP RFI loads at full requested capacity",https://interchange.puc.texas.gov/Documents/58777_38_1622647.PDF

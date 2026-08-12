@@ -1,0 +1,249 @@
+cdr_vintage,published_yyyy_mm,forecast_year,forecast_summer_peak_mw,row_label_in_source,source_url
+May 2010,2010-05,2010,64052.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/03/2010_Capacity__Demand_and_Reserves.xls
+May 2010,2010-05,2011,65206.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/03/2010_Capacity__Demand_and_Reserves.xls
+May 2010,2010-05,2012,66658.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/03/2010_Capacity__Demand_and_Reserves.xls
+May 2010,2010-05,2013,68265.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/03/2010_Capacity__Demand_and_Reserves.xls
+May 2010,2010-05,2014,69451.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/03/2010_Capacity__Demand_and_Reserves.xls
+May 2010,2010-05,2015,70517.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/03/2010_Capacity__Demand_and_Reserves.xls
+Dec 2010 (Winter Update),2010-12,2011,65206.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/03/ERCOT-2010-Capacity-Demand-and-Reserves-Report-Winter-Update.xls
+Dec 2010 (Winter Update),2010-12,2012,66658.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/03/ERCOT-2010-Capacity-Demand-and-Reserves-Report-Winter-Update.xls
+Dec 2010 (Winter Update),2010-12,2013,68265.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/03/ERCOT-2010-Capacity-Demand-and-Reserves-Report-Winter-Update.xls
+Dec 2010 (Winter Update),2010-12,2014,69451.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/03/ERCOT-2010-Capacity-Demand-and-Reserves-Report-Winter-Update.xls
+Dec 2010 (Winter Update),2010-12,2015,70517.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/03/ERCOT-2010-Capacity-Demand-and-Reserves-Report-Winter-Update.xls
+Dec 2010 (Winter Update),2010-12,2016,71376.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/03/ERCOT-2010-Capacity-Demand-and-Reserves-Report-Winter-Update.xls
+May 2011,2011-05,2011,63898.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/03/ERCOT_2011__Capacity_Demand_and_Reserves_Report.xls
+May 2011,2011-05,2012,65665.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/03/ERCOT_2011__Capacity_Demand_and_Reserves_Report.xls
+May 2011,2011-05,2013,67757.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/03/ERCOT_2011__Capacity_Demand_and_Reserves_Report.xls
+May 2011,2011-05,2014,70540.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/03/ERCOT_2011__Capacity_Demand_and_Reserves_Report.xls
+May 2011,2011-05,2015,72591.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/03/ERCOT_2011__Capacity_Demand_and_Reserves_Report.xls
+May 2011,2011-05,2016,74198.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/03/ERCOT_2011__Capacity_Demand_and_Reserves_Report.xls
+May 2011,2011-05,2017,75365.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/03/ERCOT_2011__Capacity_Demand_and_Reserves_Report.xls
+May 2011,2011-05,2018,76654.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/03/ERCOT_2011__Capacity_Demand_and_Reserves_Report.xls
+May 2011,2011-05,2019,77866.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/03/ERCOT_2011__Capacity_Demand_and_Reserves_Report.xls
+May 2011,2011-05,2020,79274.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/03/ERCOT_2011__Capacity_Demand_and_Reserves_Report.xls
+Dec 2011 (Winter Update),2011-12,2012,66195.0,"Summer Peak Demand (Normal weather basis), MW",https://www.ercot.com/files/docs/2017/11/03/CDR_2011WinterUpdate.xls
+Dec 2011 (Winter Update),2011-12,2013,67168.0,"Summer Peak Demand (Normal weather basis), MW",https://www.ercot.com/files/docs/2017/11/03/CDR_2011WinterUpdate.xls
+Dec 2011 (Winter Update),2011-12,2014,70087.0,"Summer Peak Demand (Normal weather basis), MW",https://www.ercot.com/files/docs/2017/11/03/CDR_2011WinterUpdate.xls
+Dec 2011 (Winter Update),2011-12,2015,73552.0,"Summer Peak Demand (Normal weather basis), MW",https://www.ercot.com/files/docs/2017/11/03/CDR_2011WinterUpdate.xls
+Dec 2011 (Winter Update),2011-12,2016,76001.0,"Summer Peak Demand (Normal weather basis), MW",https://www.ercot.com/files/docs/2017/11/03/CDR_2011WinterUpdate.xls
+Dec 2011 (Winter Update),2011-12,2017,77596.0,"Summer Peak Demand (Normal weather basis), MW",https://www.ercot.com/files/docs/2017/11/03/CDR_2011WinterUpdate.xls
+Dec 2011 (Winter Update),2011-12,2018,78919.0,"Summer Peak Demand (Normal weather basis), MW",https://www.ercot.com/files/docs/2017/11/03/CDR_2011WinterUpdate.xls
+Dec 2011 (Winter Update),2011-12,2019,79411.0,"Summer Peak Demand (Normal weather basis), MW",https://www.ercot.com/files/docs/2017/11/03/CDR_2011WinterUpdate.xls
+Dec 2011 (Winter Update),2011-12,2020,81382.0,"Summer Peak Demand (Normal weather basis), MW",https://www.ercot.com/files/docs/2017/11/03/CDR_2011WinterUpdate.xls
+Dec 2011 (Winter Update),2011-12,2021,82765.0,"Summer Peak Demand (Normal weather basis), MW",https://www.ercot.com/files/docs/2017/11/03/CDR_2011WinterUpdate.xls
+Dec 2011 (Winter Update),2011-12,2022,84013.0,"Summer Peak Demand (Normal weather basis), MW",https://www.ercot.com/files/docs/2017/11/03/CDR_2011WinterUpdate.xls
+May 2012,2012-05,2013,67168.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2012/05/22/capacitydemandandreservereport_2012.xls
+May 2012,2012-05,2014,70087.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2012/05/22/capacitydemandandreservereport_2012.xls
+May 2012,2012-05,2015,73552.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2012/05/22/capacitydemandandreservereport_2012.xls
+May 2012,2012-05,2016,76001.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2012/05/22/capacitydemandandreservereport_2012.xls
+May 2012,2012-05,2017,77596.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2012/05/22/capacitydemandandreservereport_2012.xls
+May 2012,2012-05,2018,78919.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2012/05/22/capacitydemandandreservereport_2012.xls
+May 2012,2012-05,2019,79411.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2012/05/22/capacitydemandandreservereport_2012.xls
+May 2012,2012-05,2020,81382.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2012/05/22/capacitydemandandreservereport_2012.xls
+May 2012,2012-05,2021,82765.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2012/05/22/capacitydemandandreservereport_2012.xls
+May 2012,2012-05,2022,84013.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2012/05/22/capacitydemandandreservereport_2012.xls
+Dec 2012 (Winter),2012-12,2013,67998.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2012/12/10/capacitydemandandreservesreport_winter_2012_final.xls
+Dec 2012 (Winter),2012-12,2014,69807.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2012/12/10/capacitydemandandreservesreport_winter_2012_final.xls
+Dec 2012 (Winter),2012-12,2015,72071.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2012/12/10/capacitydemandandreservesreport_winter_2012_final.xls
+Dec 2012 (Winter),2012-12,2016,74191.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2012/12/10/capacitydemandandreservesreport_winter_2012_final.xls
+Dec 2012 (Winter),2012-12,2017,75409.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2012/12/10/capacitydemandandreservesreport_winter_2012_final.xls
+Dec 2012 (Winter),2012-12,2018,76186.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2012/12/10/capacitydemandandreservesreport_winter_2012_final.xls
+Dec 2012 (Winter),2012-12,2019,76882.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2012/12/10/capacitydemandandreservesreport_winter_2012_final.xls
+Dec 2012 (Winter),2012-12,2020,77608.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2012/12/10/capacitydemandandreservesreport_winter_2012_final.xls
+Dec 2012 (Winter),2012-12,2021,78380.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2012/12/10/capacitydemandandreservesreport_winter_2012_final.xls
+Dec 2012 (Winter),2012-12,2022,79055.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2012/12/10/capacitydemandandreservesreport_winter_2012_final.xls
+May 2013,2013-05,2014,69807.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/06/CapacityDemandandReserveReport-2013.xls
+May 2013,2013-05,2015,72071.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/06/CapacityDemandandReserveReport-2013.xls
+May 2013,2013-05,2016,74191.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/06/CapacityDemandandReserveReport-2013.xls
+May 2013,2013-05,2017,75409.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/06/CapacityDemandandReserveReport-2013.xls
+May 2013,2013-05,2018,76186.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/06/CapacityDemandandReserveReport-2013.xls
+May 2013,2013-05,2019,76882.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/06/CapacityDemandandReserveReport-2013.xls
+May 2013,2013-05,2020,77608.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/06/CapacityDemandandReserveReport-2013.xls
+May 2013,2013-05,2021,78380.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/06/CapacityDemandandReserveReport-2013.xls
+May 2013,2013-05,2022,79055.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/06/CapacityDemandandReserveReport-2013.xls
+May 2013,2013-05,2023,79651.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2017/11/06/CapacityDemandandReserveReport-2013.xls
+Feb 2014,2014-02,2014,68096.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2014/02/27/capacitydemandandreservereport_february2014.xls
+Feb 2014,2014-02,2015,69057.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2014/02/27/capacitydemandandreservereport_february2014.xls
+Feb 2014,2014-02,2016,70014.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2014/02/27/capacitydemandandreservereport_february2014.xls
+Feb 2014,2014-02,2017,70871.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2014/02/27/capacitydemandandreservereport_february2014.xls
+Feb 2014,2014-02,2018,71806.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2014/02/27/capacitydemandandreservereport_february2014.xls
+Feb 2014,2014-02,2019,72859.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2014/02/27/capacitydemandandreservereport_february2014.xls
+Feb 2014,2014-02,2020,73784.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2014/02/27/capacitydemandandreservereport_february2014.xls
+Feb 2014,2014-02,2021,74710.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2014/02/27/capacitydemandandreservereport_february2014.xls
+Feb 2014,2014-02,2022,75631.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2014/02/27/capacitydemandandreservereport_february2014.xls
+Feb 2014,2014-02,2023,76550.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2014/02/27/capacitydemandandreservereport_february2014.xls
+May 2014,2014-05,2015,69057.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2014/05/01/capacitydemandandreservereport_may2014.xls
+May 2014,2014-05,2016,70014.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2014/05/01/capacitydemandandreservereport_may2014.xls
+May 2014,2014-05,2017,70871.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2014/05/01/capacitydemandandreservereport_may2014.xls
+May 2014,2014-05,2018,71806.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2014/05/01/capacitydemandandreservereport_may2014.xls
+May 2014,2014-05,2019,72859.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2014/05/01/capacitydemandandreservereport_may2014.xls
+May 2014,2014-05,2020,73784.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2014/05/01/capacitydemandandreservereport_may2014.xls
+May 2014,2014-05,2021,74710.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2014/05/01/capacitydemandandreservereport_may2014.xls
+May 2014,2014-05,2022,75631.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2014/05/01/capacitydemandandreservereport_may2014.xls
+May 2014,2014-05,2023,76550.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2014/05/01/capacitydemandandreservereport_may2014.xls
+May 2014,2014-05,2024,77471.0,"Total Summer Peak Demand, MW",https://www.ercot.com/files/docs/2014/05/01/capacitydemandandreservereport_may2014.xls
+Dec 2014,2014-12,2015,69057.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2014/12/01/capacitydemandandreservereport_dec2014.xls
+Dec 2014,2014-12,2016,70014.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2014/12/01/capacitydemandandreservereport_dec2014.xls
+Dec 2014,2014-12,2017,70871.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2014/12/01/capacitydemandandreservereport_dec2014.xls
+Dec 2014,2014-12,2018,71806.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2014/12/01/capacitydemandandreservereport_dec2014.xls
+Dec 2014,2014-12,2019,72859.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2014/12/01/capacitydemandandreservereport_dec2014.xls
+Dec 2014,2014-12,2020,73784.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2014/12/01/capacitydemandandreservereport_dec2014.xls
+Dec 2014,2014-12,2021,74710.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2014/12/01/capacitydemandandreservereport_dec2014.xls
+Dec 2014,2014-12,2022,75631.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2014/12/01/capacitydemandandreservereport_dec2014.xls
+Dec 2014,2014-12,2023,76550.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2014/12/01/capacitydemandandreservereport_dec2014.xls
+Dec 2014,2014-12,2024,77471.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2014/12/01/capacitydemandandreservereport_dec2014.xls
+May 2015,2015-05,2016,70014.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2015/05/01/capacitydemandandreservereport_may2015.xls
+May 2015,2015-05,2017,70871.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2015/05/01/capacitydemandandreservereport_may2015.xls
+May 2015,2015-05,2018,71806.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2015/05/01/capacitydemandandreservereport_may2015.xls
+May 2015,2015-05,2019,72859.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2015/05/01/capacitydemandandreservereport_may2015.xls
+May 2015,2015-05,2020,73784.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2015/05/01/capacitydemandandreservereport_may2015.xls
+May 2015,2015-05,2021,74710.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2015/05/01/capacitydemandandreservereport_may2015.xls
+May 2015,2015-05,2022,75631.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2015/05/01/capacitydemandandreservereport_may2015.xls
+May 2015,2015-05,2023,76550.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2015/05/01/capacitydemandandreservereport_may2015.xls
+May 2015,2015-05,2024,77471.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2015/05/01/capacitydemandandreservereport_may2015.xls
+May 2015,2015-05,2025,78384.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2015/05/01/capacitydemandandreservereport_may2015.xls
+Dec 2015,2015-12,2016,70588.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2015/12/01/capacitydemandandreservereport_december2015.xls
+Dec 2015,2015-12,2017,71416.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2015/12/01/capacitydemandandreservereport_december2015.xls
+Dec 2015,2015-12,2018,72277.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2015/12/01/capacitydemandandreservereport_december2015.xls
+Dec 2015,2015-12,2019,73663.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2015/12/01/capacitydemandandreservereport_december2015.xls
+Dec 2015,2015-12,2020,74288.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2015/12/01/capacitydemandandreservereport_december2015.xls
+Dec 2015,2015-12,2021,74966.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2015/12/01/capacitydemandandreservereport_december2015.xls
+Dec 2015,2015-12,2022,75660.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2015/12/01/capacitydemandandreservereport_december2015.xls
+Dec 2015,2015-12,2023,76350.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2015/12/01/capacitydemandandreservereport_december2015.xls
+Dec 2015,2015-12,2024,77036.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2015/12/01/capacitydemandandreservereport_december2015.xls
+Dec 2015,2015-12,2025,77732.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2015/12/01/capacitydemandandreservereport_december2015.xls
+May 2016,2016-05,2017,71416.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2016/05/03/CapacityDemandandReserveReport_May2016.xlsx
+May 2016,2016-05,2018,72277.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2016/05/03/CapacityDemandandReserveReport_May2016.xlsx
+May 2016,2016-05,2019,73663.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2016/05/03/CapacityDemandandReserveReport_May2016.xlsx
+May 2016,2016-05,2020,74288.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2016/05/03/CapacityDemandandReserveReport_May2016.xlsx
+May 2016,2016-05,2021,74966.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2016/05/03/CapacityDemandandReserveReport_May2016.xlsx
+May 2016,2016-05,2022,75660.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2016/05/03/CapacityDemandandReserveReport_May2016.xlsx
+May 2016,2016-05,2023,76350.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2016/05/03/CapacityDemandandReserveReport_May2016.xlsx
+May 2016,2016-05,2024,77036.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2016/05/03/CapacityDemandandReserveReport_May2016.xlsx
+May 2016,2016-05,2025,77732.0,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2016/05/03/CapacityDemandandReserveReport_May2016.xlsx
+May 2016,2016-05,2026,78571.5,Total Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2016/05/03/CapacityDemandandReserveReport_May2016.xlsx
+Dec 2016,2016-12,2017,72933.6,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2016/12/15/CapacityDemandandReserveReport-Dec2016.xlsx
+Dec 2016,2016-12,2018,74149.4,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2016/12/15/CapacityDemandandReserveReport-Dec2016.xlsx
+Dec 2016,2016-12,2019,75588.3,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2016/12/15/CapacityDemandandReserveReport-Dec2016.xlsx
+Dec 2016,2016-12,2020,76510.3,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2016/12/15/CapacityDemandandReserveReport-Dec2016.xlsx
+Dec 2016,2016-12,2021,77417.2,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2016/12/15/CapacityDemandandReserveReport-Dec2016.xlsx
+May 2017,2017-05,2018,74149.4,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2017/05/02/CapacityDemandandReserveReport-May2017.xlsx
+May 2017,2017-05,2019,75588.3,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2017/05/02/CapacityDemandandReserveReport-May2017.xlsx
+May 2017,2017-05,2020,76510.3,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2017/05/02/CapacityDemandandReserveReport-May2017.xlsx
+May 2017,2017-05,2021,77417.2,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2017/05/02/CapacityDemandandReserveReport-May2017.xlsx
+May 2017,2017-05,2022,78377.3,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2017/05/02/CapacityDemandandReserveReport-May2017.xlsx
+Dec 2017,2017-12,2018,72974.0,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2017/12/19/CapacityDemandandReserveReport-Dec2017.xlsx
+Dec 2017,2017-12,2019,74638.7,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2017/12/19/CapacityDemandandReserveReport-Dec2017.xlsx
+Dec 2017,2017-12,2020,75878.6,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2017/12/19/CapacityDemandandReserveReport-Dec2017.xlsx
+Dec 2017,2017-12,2021,77125.1,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2017/12/19/CapacityDemandandReserveReport-Dec2017.xlsx
+Dec 2017,2017-12,2022,78555.8,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2017/12/19/CapacityDemandandReserveReport-Dec2017.xlsx
+May 2018,2018-05,2019,74202.0,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2018/04/30/CapacityDemandandReserveReport-May2018.xlsx
+May 2018,2018-05,2020,75878.6,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2018/04/30/CapacityDemandandReserveReport-May2018.xlsx
+May 2018,2018-05,2021,77595.1,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2018/04/30/CapacityDemandandReserveReport-May2018.xlsx
+May 2018,2018-05,2022,79026.8,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2018/04/30/CapacityDemandandReserveReport-May2018.xlsx
+May 2018,2018-05,2023,80430.6,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2018/04/30/CapacityDemandandReserveReport-May2018.xlsx
+Dec 2018,2018-12,2019,74853.2,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2018/12/11/CapacityDemandandReservesReport-Dec2018.xlsx
+Dec 2018,2018-12,2020,76845.5,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2018/12/11/CapacityDemandandReservesReport-Dec2018.xlsx
+Dec 2018,2018-12,2021,78823.7,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2018/12/11/CapacityDemandandReservesReport-Dec2018.xlsx
+Dec 2018,2018-12,2022,80454.6,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2018/12/11/CapacityDemandandReservesReport-Dec2018.xlsx
+Dec 2018,2018-12,2023,82101.4,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2018/12/11/CapacityDemandandReservesReport-Dec2018.xlsx
+May 2019,2019-05,2020,76845.5,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2019/05/08/CapacityDemandandReserveReport-May2019.xlsx
+May 2019,2019-05,2021,78823.7,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2019/05/08/CapacityDemandandReserveReport-May2019.xlsx
+May 2019,2019-05,2022,80589.6,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2019/05/08/CapacityDemandandReserveReport-May2019.xlsx
+May 2019,2019-05,2023,82506.4,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2019/05/08/CapacityDemandandReserveReport-May2019.xlsx
+May 2019,2019-05,2024,84121.5,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2019/05/08/CapacityDemandandReserveReport-May2019.xlsx
+Dec 2019,2019-12,2020,76695.6,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2019/12/05/CapacityDemandandReserveReport-Dec2019.xlsx
+Dec 2019,2019-12,2021,78298.7,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2019/12/05/CapacityDemandandReserveReport-Dec2019.xlsx
+Dec 2019,2019-12,2022,80107.6,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2019/12/05/CapacityDemandandReserveReport-Dec2019.xlsx
+Dec 2019,2019-12,2023,81593.3,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2019/12/05/CapacityDemandandReserveReport-Dec2019.xlsx
+Dec 2019,2019-12,2024,82982.1,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2019/12/05/CapacityDemandandReserveReport-Dec2019.xlsx
+May 2020,2020-05,2021,78298.7,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2020/05/13/CapacityDemandandReserveReport_May2020.xlsx
+May 2020,2020-05,2022,80107.6,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2020/05/13/CapacityDemandandReserveReport_May2020.xlsx
+May 2020,2020-05,2023,81593.3,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2020/05/13/CapacityDemandandReserveReport_May2020.xlsx
+May 2020,2020-05,2024,82982.1,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2020/05/13/CapacityDemandandReserveReport_May2020.xlsx
+May 2020,2020-05,2025,84193.3,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2020/05/13/CapacityDemandandReserveReport_May2020.xlsx
+Dec 2020,2020-12,2021,77243.6,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2020/12/16/CapacityDemandandReservesReport_Dec2020.xlsx
+Dec 2020,2020-12,2022,78855.3,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2020/12/16/CapacityDemandandReservesReport_Dec2020.xlsx
+Dec 2020,2020-12,2023,80280.3,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2020/12/16/CapacityDemandandReservesReport_Dec2020.xlsx
+Dec 2020,2020-12,2024,81266.8,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2020/12/16/CapacityDemandandReservesReport_Dec2020.xlsx
+Dec 2020,2020-12,2025,82057.6,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2020/12/16/CapacityDemandandReservesReport_Dec2020.xlsx
+May 2021,2021-05,2022,78855.3,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2021/05/06/CapacityDemandandReservesReport_May2021.xlsx
+May 2021,2021-05,2023,80280.3,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2021/05/06/CapacityDemandandReservesReport_May2021.xlsx
+May 2021,2021-05,2024,81266.8,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2021/05/06/CapacityDemandandReservesReport_May2021.xlsx
+May 2021,2021-05,2025,82057.6,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2021/05/06/CapacityDemandandReservesReport_May2021.xlsx
+May 2021,2021-05,2026,82838.1,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2021/05/06/CapacityDemandandReservesReport_May2021.xlsx
+Dec 2021,2021-12,2022,78083.7,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2021/12/29/CapacityDemandandReservesReport_December2021.xlsx
+Dec 2021,2021-12,2023,79857.4,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2021/12/29/CapacityDemandandReservesReport_December2021.xlsx
+Dec 2021,2021-12,2024,81239.2,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2021/12/29/CapacityDemandandReservesReport_December2021.xlsx
+Dec 2021,2021-12,2025,82408.4,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2021/12/29/CapacityDemandandReservesReport_December2021.xlsx
+Dec 2021,2021-12,2026,83573.5,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2021/12/29/CapacityDemandandReservesReport_December2021.xlsx
+Dec 2021,2021-12,2027,84505.9,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2021/12/29/CapacityDemandandReservesReport_December2021.xlsx
+Dec 2021,2021-12,2028,85390.9,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2021/12/29/CapacityDemandandReservesReport_December2021.xlsx
+Dec 2021,2021-12,2029,86254.3,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2021/12/29/CapacityDemandandReservesReport_December2021.xlsx
+Dec 2021,2021-12,2030,87068.4,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2021/12/29/CapacityDemandandReservesReport_December2021.xlsx
+Dec 2021,2021-12,2031,87853.1,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2021/12/29/CapacityDemandandReservesReport_December2021.xlsx
+May 2022,2022-05,2023,79857.4,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2022/05/16/CapacityDemandandReservesReport_May2022.xlsx
+May 2022,2022-05,2024,81239.2,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2022/05/16/CapacityDemandandReservesReport_May2022.xlsx
+May 2022,2022-05,2025,82408.4,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2022/05/16/CapacityDemandandReservesReport_May2022.xlsx
+May 2022,2022-05,2026,83573.5,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2022/05/16/CapacityDemandandReservesReport_May2022.xlsx
+May 2022,2022-05,2027,84505.9,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2022/05/16/CapacityDemandandReservesReport_May2022.xlsx
+May 2022,2022-05,2028,85390.9,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2022/05/16/CapacityDemandandReservesReport_May2022.xlsx
+May 2022,2022-05,2029,86254.3,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2022/05/16/CapacityDemandandReservesReport_May2022.xlsx
+May 2022,2022-05,2030,87068.4,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2022/05/16/CapacityDemandandReservesReport_May2022.xlsx
+May 2022,2022-05,2031,87853.1,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2022/05/16/CapacityDemandandReservesReport_May2022.xlsx
+May 2022,2022-05,2032,88645.0,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2022/05/16/CapacityDemandandReservesReport_May2022.xlsx
+Nov 2022,2022-11,2023,82739.4,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2022/11/29/CapacityDemandandReservesReport_Nov2022.xlsx
+Nov 2022,2022-11,2024,85029.1,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2022/11/29/CapacityDemandandReservesReport_Nov2022.xlsx
+Nov 2022,2022-11,2025,86715.4,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2022/11/29/CapacityDemandandReservesReport_Nov2022.xlsx
+Nov 2022,2022-11,2026,88377.7,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2022/11/29/CapacityDemandandReservesReport_Nov2022.xlsx
+Nov 2022,2022-11,2027,90035.7,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2022/11/29/CapacityDemandandReservesReport_Nov2022.xlsx
+Nov 2022,2022-11,2028,90879.4,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2022/11/29/CapacityDemandandReservesReport_Nov2022.xlsx
+Nov 2022,2022-11,2029,91684.7,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2022/11/29/CapacityDemandandReservesReport_Nov2022.xlsx
+Nov 2022,2022-11,2030,92451.8,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2022/11/29/CapacityDemandandReservesReport_Nov2022.xlsx
+Nov 2022,2022-11,2031,93166.7,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2022/11/29/CapacityDemandandReservesReport_Nov2022.xlsx
+Nov 2022,2022-11,2032,93853.3,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2022/11/29/CapacityDemandandReservesReport_Nov2022.xlsx
+May 2023 (Revised2),2023-05,2024,85029.1,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2023/05/05/CapacityDemandandReservesReport_May2023_Revised2.xlsx
+May 2023 (Revised2),2023-05,2025,86715.4,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2023/05/05/CapacityDemandandReservesReport_May2023_Revised2.xlsx
+May 2023 (Revised2),2023-05,2026,88377.7,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2023/05/05/CapacityDemandandReservesReport_May2023_Revised2.xlsx
+May 2023 (Revised2),2023-05,2027,90035.7,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2023/05/05/CapacityDemandandReservesReport_May2023_Revised2.xlsx
+May 2023 (Revised2),2023-05,2028,90879.4,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2023/05/05/CapacityDemandandReservesReport_May2023_Revised2.xlsx
+May 2023 (Revised2),2023-05,2029,91684.7,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2023/05/05/CapacityDemandandReservesReport_May2023_Revised2.xlsx
+May 2023 (Revised2),2023-05,2030,92451.8,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2023/05/05/CapacityDemandandReservesReport_May2023_Revised2.xlsx
+May 2023 (Revised2),2023-05,2031,93166.7,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2023/05/05/CapacityDemandandReservesReport_May2023_Revised2.xlsx
+May 2023 (Revised2),2023-05,2032,93853.3,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2023/05/05/CapacityDemandandReservesReport_May2023_Revised2.xlsx
+May 2023 (Revised2),2023-05,2033,94530.0,Summer Peak Demand (based on normal weather),https://www.ercot.com/files/docs/2023/05/05/CapacityDemandandReservesReport_May2023_Revised2.xlsx
+Dec 2023,2023-12,2024,83765.0,"Summer Peak Demand, Gross (based on normal weather)",https://www.ercot.com/files/docs/2023/12/07/CapacityDemandandReservesReport_Dec2023.xlsx
+Dec 2023,2023-12,2025,84750.0,"Summer Peak Demand, Gross (based on normal weather)",https://www.ercot.com/files/docs/2023/12/07/CapacityDemandandReservesReport_Dec2023.xlsx
+Dec 2023,2023-12,2026,85694.0,"Summer Peak Demand, Gross (based on normal weather)",https://www.ercot.com/files/docs/2023/12/07/CapacityDemandandReservesReport_Dec2023.xlsx
+Dec 2023,2023-12,2027,86991.0,"Summer Peak Demand, Gross (based on normal weather)",https://www.ercot.com/files/docs/2023/12/07/CapacityDemandandReservesReport_Dec2023.xlsx
+Dec 2023,2023-12,2028,89275.0,"Summer Peak Demand, Gross (based on normal weather)",https://www.ercot.com/files/docs/2023/12/07/CapacityDemandandReservesReport_Dec2023.xlsx
+Dec 2023,2023-12,2029,91537.0,"Summer Peak Demand, Gross (based on normal weather)",https://www.ercot.com/files/docs/2023/12/07/CapacityDemandandReservesReport_Dec2023.xlsx
+Dec 2023,2023-12,2030,93368.0,"Summer Peak Demand, Gross (based on normal weather)",https://www.ercot.com/files/docs/2023/12/07/CapacityDemandandReservesReport_Dec2023.xlsx
+Dec 2023,2023-12,2031,96011.0,"Summer Peak Demand, Gross (based on normal weather)",https://www.ercot.com/files/docs/2023/12/07/CapacityDemandandReservesReport_Dec2023.xlsx
+Dec 2023,2023-12,2032,98698.0,"Summer Peak Demand, Gross (based on normal weather)",https://www.ercot.com/files/docs/2023/12/07/CapacityDemandandReservesReport_Dec2023.xlsx
+Dec 2023,2023-12,2033,101403.0,"Summer Peak Demand, Gross (based on normal weather)",https://www.ercot.com/files/docs/2023/12/07/CapacityDemandandReservesReport_Dec2023.xlsx
+May 2024 (Revised),2024-05,2025,84754.0,Base Summer Peak Demand (assuming normal weather),https://www.ercot.com/files/docs/2024/05/24/CapacityDemandandReservesReport_May2024_Revised.xlsx
+May 2024 (Revised),2024-05,2026,86158.0,Base Summer Peak Demand (assuming normal weather),https://www.ercot.com/files/docs/2024/05/24/CapacityDemandandReservesReport_May2024_Revised.xlsx
+May 2024 (Revised),2024-05,2027,87610.0,Base Summer Peak Demand (assuming normal weather),https://www.ercot.com/files/docs/2024/05/24/CapacityDemandandReservesReport_May2024_Revised.xlsx
+May 2024 (Revised),2024-05,2028,88804.0,Base Summer Peak Demand (assuming normal weather),https://www.ercot.com/files/docs/2024/05/24/CapacityDemandandReservesReport_May2024_Revised.xlsx
+May 2024 (Revised),2024-05,2029,89765.0,Base Summer Peak Demand (assuming normal weather),https://www.ercot.com/files/docs/2024/05/24/CapacityDemandandReservesReport_May2024_Revised.xlsx
+May 2024 (Revised),2024-05,2030,91011.0,Base Summer Peak Demand (assuming normal weather),https://www.ercot.com/files/docs/2024/05/24/CapacityDemandandReservesReport_May2024_Revised.xlsx
+May 2024 (Revised),2024-05,2031,92086.0,Base Summer Peak Demand (assuming normal weather),https://www.ercot.com/files/docs/2024/05/24/CapacityDemandandReservesReport_May2024_Revised.xlsx
+May 2024 (Revised),2024-05,2032,93129.0,Base Summer Peak Demand (assuming normal weather),https://www.ercot.com/files/docs/2024/05/24/CapacityDemandandReservesReport_May2024_Revised.xlsx
+May 2024 (Revised),2024-05,2033,94144.0,Base Summer Peak Demand (assuming normal weather),https://www.ercot.com/files/docs/2024/05/24/CapacityDemandandReservesReport_May2024_Revised.xlsx
+May 2024 (Revised),2024-05,2034,95043.0,Base Summer Peak Demand (assuming normal weather),https://www.ercot.com/files/docs/2024/05/24/CapacityDemandandReservesReport_May2024_Revised.xlsx
+Dec 2024 (pub. Feb 2025),2024-12,2025,91935.2,Total Summer Load based on normal weather conditions*,https://www.ercot.com/files/docs/2025/02/12/CapacityDemandandReservesReport_December2024.xlsx
+Dec 2024 (pub. Feb 2025),2024-12,2026,108391.2,Total Summer Load based on normal weather conditions*,https://www.ercot.com/files/docs/2025/02/12/CapacityDemandandReservesReport_December2024.xlsx
+Dec 2024 (pub. Feb 2025),2024-12,2027,123788.9,Total Summer Load based on normal weather conditions*,https://www.ercot.com/files/docs/2025/02/12/CapacityDemandandReservesReport_December2024.xlsx
+Dec 2024 (pub. Feb 2025),2024-12,2028,137318.7,Total Summer Load based on normal weather conditions*,https://www.ercot.com/files/docs/2025/02/12/CapacityDemandandReservesReport_December2024.xlsx
+Dec 2024 (pub. Feb 2025),2024-12,2029,140872.3,Total Summer Load based on normal weather conditions*,https://www.ercot.com/files/docs/2025/02/12/CapacityDemandandReservesReport_December2024.xlsx
+May 2025 (Revised),2025-05,2026,95419.4,Total Seasonal Load based on normal weather conditions*,https://www.ercot.com/files/docs/2025/05/16/CapacityDemandandReservesReport_May2025_Revised.xlsx
+May 2025 (Revised),2025-05,2027,105405.7,Total Seasonal Load based on normal weather conditions*,https://www.ercot.com/files/docs/2025/05/16/CapacityDemandandReservesReport_May2025_Revised.xlsx
+May 2025 (Revised),2025-05,2028,123088.9,Total Seasonal Load based on normal weather conditions*,https://www.ercot.com/files/docs/2025/05/16/CapacityDemandandReservesReport_May2025_Revised.xlsx
+May 2025 (Revised),2025-05,2029,130783.0,Total Seasonal Load based on normal weather conditions*,https://www.ercot.com/files/docs/2025/05/16/CapacityDemandandReservesReport_May2025_Revised.xlsx
+May 2025 (Revised),2025-05,2030,141703.7,Total Seasonal Load based on normal weather conditions*,https://www.ercot.com/files/docs/2025/05/16/CapacityDemandandReservesReport_May2025_Revised.xlsx
+Dec 2025,2025-12,2026,95419.4,Total Seasonal Load based on normal weather conditions*,https://www.ercot.com/files/docs/2025/12/19/CapacityDemandandReservesReport_December2025.xlsx
+Dec 2025,2025-12,2027,105405.7,Total Seasonal Load based on normal weather conditions*,https://www.ercot.com/files/docs/2025/12/19/CapacityDemandandReservesReport_December2025.xlsx
+Dec 2025,2025-12,2028,123088.9,Total Seasonal Load based on normal weather conditions*,https://www.ercot.com/files/docs/2025/12/19/CapacityDemandandReservesReport_December2025.xlsx
+Dec 2025,2025-12,2029,130783.0,Total Seasonal Load based on normal weather conditions*,https://www.ercot.com/files/docs/2025/12/19/CapacityDemandandReservesReport_December2025.xlsx
+Dec 2025,2025-12,2030,141703.7,Total Seasonal Load based on normal weather conditions*,https://www.ercot.com/files/docs/2025/12/19/CapacityDemandandReservesReport_December2025.xlsx
